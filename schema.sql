@@ -1,0 +1,106 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE IF NOT EXISTS users (
+ id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+ name TEXT NOT NULL,
+ email TEXT NOT NULL UNIQUE,
+ password_hash TEXT NOT NULL,
+ role TEXT NOT NULL DEFAULT 'user' CHECK (role IN ('user','admin')),
+ created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS users_role_idx ON users(role);
+
+CREATE TABLE IF NOT EXISTS clients (
+ id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+ user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+ name TEXT NOT NULL,
+ phone TEXT,
+ note TEXT,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS clients_user_idx ON clients(user_id);
+
+CREATE TABLE IF NOT EXISTS quotes (
+ id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+ code TEXT NOT NULL,
+ user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+ client_id UUID REFERENCES clients(id) ON DELETE SET NULL,
+ status TEXT NOT NULL DEFAULT 'Cotação',
+ products JSONB NOT NULL DEFAULT '[]'::jsonb,
+ freight JSONB,
+ fx NUMERIC(14,6) NOT NULL DEFAULT 0,
+ profit NUMERIC(8,3) NOT NULL DEFAULT 0,
+ service NUMERIC(8,3) NOT NULL DEFAULT 0,
+ import_tax NUMERIC(8,3) NOT NULL DEFAULT 0,
+ icms NUMERIC(8,3) NOT NULL DEFAULT 0,
+ total_text TEXT NOT NULL DEFAULT 'R$ 0,00',
+ total_numeric NUMERIC(14,2) NOT NULL DEFAULT 0,
+ weight_grams NUMERIC(14,3) NOT NULL DEFAULT 0,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS quotes_user_idx ON quotes(user_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS quotes_client_idx ON quotes(client_id);
+
+CREATE TABLE IF NOT EXISTS orders (
+ id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+ code TEXT NOT NULL,
+ user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+ quote_id UUID NOT NULL REFERENCES quotes(id) ON DELETE RESTRICT,
+ client_id UUID REFERENCES clients(id) ON DELETE SET NULL,
+ status TEXT NOT NULL DEFAULT 'Pedido',
+ products JSONB NOT NULL DEFAULT '[]'::jsonb,
+ freight JSONB,
+ fx NUMERIC(14,6) NOT NULL DEFAULT 0,
+ total_text TEXT NOT NULL DEFAULT 'R$ 0,00',
+ total_numeric NUMERIC(14,2) NOT NULL DEFAULT 0,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS orders_user_idx ON orders(user_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS orders_client_idx ON orders(client_id);
+
+CREATE TABLE IF NOT EXISTS quote_history (
+ id BIGSERIAL PRIMARY KEY,
+ quote_id UUID NOT NULL REFERENCES quotes(id) ON DELETE CASCADE,
+ user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+ action TEXT NOT NULL,
+ details JSONB NOT NULL DEFAULT '{}'::jsonb,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS quote_history_quote_idx ON quote_history(quote_id, created_at DESC);
+
+CREATE TABLE IF NOT EXISTS order_history (
+ id BIGSERIAL PRIMARY KEY,
+ order_id UUID NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+ user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+ action TEXT NOT NULL,
+ details JSONB NOT NULL DEFAULT '{}'::jsonb,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS order_history_order_idx ON order_history(order_id, created_at DESC);
+
+CREATE TABLE IF NOT EXISTS user_settings (
+ user_id UUID PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+ default_profit NUMERIC(8,3) NOT NULL DEFAULT 15,
+ updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS freights (
+ id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+ user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+ name TEXT NOT NULL, code TEXT, country TEXT NOT NULL DEFAULT 'Brasil',
+ min_weight NUMERIC(14,3) NOT NULL DEFAULT 0, max_weight NUMERIC(14,3) NOT NULL DEFAULT 0,
+ first_weight NUMERIC(14,3) NOT NULL DEFAULT 0, first_fee NUMERIC(14,2) NOT NULL DEFAULT 0,
+ continue_weight NUMERIC(14,3) NOT NULL DEFAULT 0, continue_fee NUMERIC(14,2) NOT NULL DEFAULT 0,
+ travel_time TEXT, insurance_fee NUMERIC(14,2) NOT NULL DEFAULT 0, description TEXT,
+ is_favorite BOOLEAN NOT NULL DEFAULT false, active BOOLEAN NOT NULL DEFAULT true,
+ created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(), updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS freights_user_idx ON freights(user_id,is_favorite DESC,name);
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS email TEXT;
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS cpf_cnpj TEXT;
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS address TEXT;
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS city TEXT;
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS state TEXT;
+ALTER TABLE clients ADD COLUMN IF NOT EXISTS zip TEXT;
+ALTER TABLE quotes ADD COLUMN IF NOT EXISTS notes TEXT;
+ALTER TABLE quotes ADD COLUMN IF NOT EXISTS extras JSONB NOT NULL DEFAULT '[]'::jsonb;
