@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ForwardPro</title>
+</head>
+<body>
+</body>
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ForwardPro — Gestão de Redirecionamentos</title>
+    <style>
+        :root{--bg:#070b14;--panel:#101829;--panel2:#141e33;--line:#26324a;--text:#f5f7ff;--muted:#8e9bb8;--p:#6c7cff;--p2:#8b5cf6;--green:#35d49a;--orange:#f6b94c;--red:#ff6b7a;--shadow:0 22px 70px #0006}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 5% 0%,#6c7cff22,transparent 28%),radial-gradient(circle at 95% 0%,#8b5cf61c,transparent 25%),linear-gradient(145deg,#060912,#0b1120 55%,#090d18);color:var(--text);font:14px Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}button,input,select{font:inherit}.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}.side{position:sticky;top:0;height:100vh;padding:22px 14px;background:#070b14cc;border-right:1px solid #ffffff10;backdrop-filter:blur(18px);z-index:10}.brand{font-size:25px;font-weight:900;letter-spacing:-1px;padding:4px 12px 28px}.brand span{color:var(--p)}.navlabel{color:#5d6a84;text-transform:uppercase;font-size:10px;letter-spacing:1.5px;padding:0 12px 8px}.nav{display:grid;gap:5px}.nav button{border:1px solid transparent;background:transparent;color:#99a7c2;border-radius:11px;padding:12px;text-align:left;cursor:pointer;transition:.22s}.nav button:hover{background:#6c7cff10;color:white;transform:translateX(2px)}.nav button.active{background:linear-gradient(90deg,#6c7cff22,#6c7cff05);border-color:#6c7cff25;color:white}.sidebottom{position:absolute;left:14px;right:14px;bottom:18px}.sidecard{border:1px solid #ffffff10;background:#101829aa;padding:13px;border-radius:13px;color:var(--muted);font-size:11px;line-height:1.5}.main{min-width:0}.top{height:74px;position:sticky;top:0;z-index:8;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:#070b14a8;border-bottom:1px solid #ffffff10;backdrop-filter:blur(14px)}.title{font-weight:800}.subtitle{color:var(--muted);font-size:11px;margin-top:3px}.avatar{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--p),var(--p2));font-weight:900}.page{display:none;animation:in .28s ease}.page.active{display:block}@keyframes in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}.content{max-width:1250px;margin:auto;padding:32px}.hero,.panel,.stat,.card{border:1px solid #ffffff12;background:#101829d9;border-radius:17px;box-shadow:var(--shadow)}.hero{padding:38px;position:relative;overflow:hidden;background:linear-gradient(135deg,#6c7cff18,#101829dd 55%,#8b5cf612)}.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-120px;top:-150px;background:#6c7cff18}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#9ca9ff;font-weight:800}.hero h1{font-size:42px;line-height:1.05;letter-spacing:-2px;max-width:700px;margin:10px 0}.hero p{color:#a8b3cb;line-height:1.65;max-width:680px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.btn{border:1px solid #ffffff14;background:#172139;color:white;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:750;transition:.2s}.btn:hover{transform:translateY(-2px);border-color:#6c7cff55}.btn.primary{border:0;background:linear-gradient(135deg,var(--p),var(--p2));box-shadow:0 10px 25px #6c7cff22}.btn.danger{color:#ff9aa5}.sectionhead{display:flex;justify-content:space-between;align-items:end;margin:25px 0 12px}.sectionhead h2{font-size:18px;margin:0}.muted{color:var(--muted);font-size:11px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{padding:17px;transition:.2s}.stat:hover{transform:translateY(-3px)}.stat small{color:var(--muted)}.stat strong{display:block;font-size:26px;margin:8px 0}.green{color:var(--green)}.grid2{display:grid;grid-template-columns:1.3fr .7fr;gap:13px;margin-top:13px}.panel{padding:18px}.panel h3{margin:0 0 14px;font-size:14px}.steps{display:grid;gap:8px}.step{display:flex;gap:11px;padding:11px;background:#ffffff03;border-radius:10px}.step b{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:#6c7cff18;color:#aeb6ff}.step span{font-size:12px}.step small{display:block;color:#71809d;margin-top:3px}.toolbar{display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:14px}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.formgrid.three{grid-template-columns:repeat(3,1fr)}label{display:block;color:#8e9bb8;font-size:10px;margin-bottom:5px}input,select,textarea{width:100%;border:1px solid #ffffff13;background:#0b1221;color:#eaf0ff;border-radius:9px;padding:10px;outline:0}input:focus,select:focus,textarea:focus{border-color:#6c7cff77;box-shadow:0 0 0 3px #6c7cff13}.card{padding:18px;margin-bottom:13px}.card h2{font-size:15px;margin:0 0 15px}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:650px}.table th,.table td{text-align:left;padding:11px 8px;border-bottom:1px solid #ffffff0d;font-size:12px}.table th{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#74829e}.badge{display:inline-flex;padding:5px 8px;border-radius:99px;background:#6c7cff12;color:#aeb6ff;font-size:10px}.badge.green{background:#35d49a12;color:#62e2b0}.badge.orange{background:#f6b94c12;color:#f7ce72}.empty{text-align:center;padding:36px;color:var(--muted);border:1px dashed #ffffff15;border-radius:13px}.freights{display:grid;gap:8px}.freight{padding:14px;border:1px solid #ffffff0f;border-radius:12px;background:#ffffff03;cursor:pointer;transition:.2s}.freight:hover,.freight.active{border-color:#6c7cff55;background:#6c7cff09}.freight b{display:block}.freight .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.tag{font-size:10px;color:#8996b1;background:#172139;padding:4px 7px;border-radius:99px}.total{font-size:34px;font-weight:900;letter-spacing:-1px;margin:7px 0}.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.kpi{padding:12px;background:#ffffff03;border:1px solid #ffffff0c;border-radius:10px}.kpi small{color:var(--muted)}.kpi strong{display:block;margin-top:5px}.note{color:#8491aa;font-size:11px;line-height:1.55;padding:11px;background:#ffffff03;border:1px solid #ffffff0a;border-radius:10px}.modal{position:fixed;inset:0;background:#0009;backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal.open{display:flex}.modalbox{width:min(650px,100%);max-height:90vh;overflow:auto;background:#101829;border:1px solid #ffffff17;border-radius:17px;padding:20px;box-shadow:0 30px 100px #000}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.toast{position:fixed;right:20px;bottom:20px;background:#121b2d;border:1px solid #6c7cff44;border-radius:11px;padding:12px 15px;z-index:80;box-shadow:var(--shadow);animation:in .25s ease}.progress{height:7px;background:#1a243a;border-radius:99px;overflow:hidden}.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--p2))}.quote-total{font-size:32px;font-weight:900}.hide{display:none!important}@media(max-width:900px){.app{grid-template-columns:72px 1fr}.brand{font-size:0;text-align:center}.brand:after{content:"FP";font-size:19px}.nav button{font-size:0;text-align:center}.nav button:first-letter{font-size:17px}.navlabel,.sidebottom{display:none}.content{padding:20px}.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.top{padding:0 20px}.hero h1{font-size:32px}}@media(max-width:600px){.stats{grid-template-columns:1fr}.formgrid,.formgrid.three{grid-template-columns:1fr}.hero{padding:25px}}
+        
+        .auth-locked .app{display:none!important}.auth-screen{min-height:100vh;display:none;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at 15% 5%,#6c7cff25,transparent 30%),radial-gradient(circle at 90% 10%,#8b5cf620,transparent 25%),#070b14}.auth-locked .auth-screen{display:flex}.auth-card{width:min(430px,100%);padding:30px;border:1px solid #ffffff14;background:#101829e8;border-radius:20px;box-shadow:0 30px 100px #0008}.auth-brand{font-size:29px;font-weight:900;letter-spacing:-1px;margin-bottom:7px}.auth-brand span{color:var(--p)}.auth-title{font-size:22px;margin:22px 0 6px}.auth-sub{color:var(--muted);font-size:12px;line-height:1.55;margin-bottom:20px}.auth-form{display:grid;gap:12px}.auth-switch{text-align:center;color:var(--muted);font-size:11px;margin-top:16px}.auth-switch button{border:0;background:none;color:#9ca9ff;cursor:pointer}.userbox{display:flex;align-items:center;gap:9px}.usertext{text-align:right}.usertext b{font-size:12px}.usertext small{display:block;color:var(--muted);font-size:10px}.logout-btn{margin-left:6px}
+    
+:root{--accent:#6c7cff;--accent2:#8b5cf6;--radius:18px}
+body.light{--bg:#f4f7fb;--panel:#ffffff;--panel2:#f7f9fc;--line:#dfe5ef;--text:#182033;--muted:#667085;--p:#5865f2;--p2:#7c3aed;--green:#159f72;--orange:#c47d08;--red:#d64557;background:radial-gradient(circle at 5% 0%,#6c7cff18,transparent 28%),linear-gradient(145deg,#f8faff,#eef2f8)}
+body.light .side{background:#ffffffdd;border-right-color:#dfe5ef}body.light .top{background:#ffffffcc;border-bottom-color:#dfe5ef}body.light .hero,body.light .panel,body.light .stat,body.light .card{background:#ffffffee;border-color:#e1e6ef;box-shadow:0 18px 50px #1d29420d}body.light input,body.light select,body.light textarea{background:#f7f9fc;color:#182033;border-color:#dce3ee}body.light .btn{background:#f3f5f9;color:#1d2638;border-color:#dce3ee}body.light .btn.primary{color:#fff;background:linear-gradient(135deg,var(--p),var(--p2));border:0}body.light .sidecard{background:#f6f8fc;border-color:#e1e6ef}body.light .nav button{color:#667085}body.light .nav button.active{color:#182033;background:#eef1ff;border-color:#d9ddff}
+.theme-toggle{width:42px;height:42px;border-radius:12px;padding:0;display:grid;place-items:center;font-size:17px}.top-actions{display:flex;align-items:center;gap:8px}.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}.quick{padding:16px;border-radius:16px;border:1px solid #ffffff12;background:linear-gradient(145deg,#ffffff06,#ffffff02);cursor:pointer;transition:.22s}.quick:hover{transform:translateY(-4px);border-color:#6c7cff44;box-shadow:0 14px 35px #0002}.quick .qi{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:#6c7cff18;color:#aeb6ff;font-size:18px;margin-bottom:10px}.quick b{display:block}.quick span{font-size:11px;color:var(--muted)}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}.feature{padding:20px;border-radius:17px;border:1px solid #ffffff12;background:#101829cc}.feature .icon{font-size:24px;margin-bottom:12px}.feature h3{margin:0 0 6px}.feature p{margin:0;color:var(--muted);font-size:12px;line-height:1.6}.landing{min-height:100vh;display:grid;place-items:center;padding:35px;position:relative;overflow:hidden}.landing:before,.landing:after{content:"";position:absolute;border-radius:50%;filter:blur(10px);pointer-events:none}.landing:before{width:500px;height:500px;left:-180px;top:-220px;background:#6c7cff28}.landing:after{width:420px;height:420px;right:-150px;bottom:-180px;background:#8b5cf628}.landing-inner{width:min(1180px,100%);position:relative;z-index:1}.landing-brand{font-size:28px;font-weight:950;letter-spacing:-1.5px}.landing-brand span{color:var(--p)}.landing-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:55px;align-items:center;margin-top:70px}.landing-copy .eyebrow{color:#9ca9ff}.landing-copy h1{font-size:clamp(42px,6vw,76px);line-height:.98;letter-spacing:-4px;margin:14px 0 20px}.landing-copy h1 span{background:linear-gradient(135deg,#aab3ff,#c6a5ff);-webkit-background-clip:text;color:transparent}.landing-copy p{max-width:650px;color:#9aa7c0;font-size:16px;line-height:1.7}.landing-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.pill{padding:8px 11px;border:1px solid #ffffff12;background:#ffffff06;border-radius:99px;color:#b7c1d5;font-size:11px}.landing-card{padding:25px;border-radius:24px;border:1px solid #ffffff15;background:#101829cc;box-shadow:0 30px 100px #0007;backdrop-filter:blur(22px)}.landing-card h2{margin:0 0 7px}.landing-card p{margin:0 0 18px;color:var(--muted);font-size:12px}.landing-card .preview{display:grid;gap:9px;margin-top:16px}.preview-row{display:flex;justify-content:space-between;padding:12px;border-radius:12px;background:#ffffff05;border:1px solid #ffffff09;font-size:11px}.preview-row strong{color:#fff}.landing-foot{margin-top:65px;color:#64718b;font-size:11px;text-align:center}.setting-group{padding:16px;border:1px solid #ffffff0d;border-radius:15px;background:#ffffff03;margin-bottom:12px}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid #ffffff09}.setting-row:last-child{border-bottom:0}.setting-row b{font-size:12px}.setting-row small{display:block;color:var(--muted);margin-top:3px}.switch{position:relative;width:44px;height:24px;flex:0 0 auto}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;border-radius:99px;background:#29344b;cursor:pointer;transition:.2s}.slider:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;border-radius:50%;background:white;transition:.2s}.switch input:checked+.slider{background:linear-gradient(90deg,var(--p),var(--p2))}.switch input:checked+.slider:before{transform:translateX(20px)}
+@media(max-width:900px){.quick-grid,.feature-grid{grid-template-columns:repeat(2,1fr)}.landing-layout{grid-template-columns:1fr;gap:30px;margin-top:45px}.landing{padding:22px}.landing-copy h1{letter-spacing:-2.5px}}
+@media(max-width:600px){.quick-grid,.feature-grid{grid-template-columns:1fr}.landing-copy h1{font-size:43px}.landing-foot{margin-top:35px}}
+</style>
+</head>
+
+<body class="auth-locked">
+    <div class="auth-screen">
+        <div class="landing">
+            <div class="landing-inner">
+                <div class="landing-brand">Forward<span>Pro</span> <small style="font-size:10px;color:#69768f;font-weight:700">CLOUD</small></div>
+                <div class="landing-layout">
+                    <div class="landing-copy">
+                        <div class="eyebrow">PLATAFORMA DE GESTÃO</div>
+                        <h1>Seu negócio de <span>redirecionamento.</span><br>Em um só lugar.</h1>
+                        <p>Clientes, orçamentos, fretes, pedidos, lucro e histórico. Uma central profissional para transformar seu processo de importação em uma operação organizada.</p>
+                        <div class="landing-pills"><span class="pill">✦ PostgreSQL</span><span class="pill">◈ Calculadora</span><span class="pill">▤ PDF de orçamento</span><span class="pill">☼ Tema claro/escuro</span></div>
+                        <div class="actions"><button class="btn primary" onclick="focusLogin()">Entrar no ForwardPro</button><button class="btn" onclick="toggleAuthMode();focusLogin()">Criar minha conta</button></div>
+                    </div>
+                    <div class="landing-card" id="landingLoginCard">
+                        <div class="eyebrow">ACESSO SEGURO</div>
+                        <h2 id="authTitle">Entrar na sua conta</h2>
+                        <p id="authSub">Acesse clientes, orçamentos e pedidos de qualquer dispositivo.</p>
+                        <form class="auth-form" onsubmit="submitAuth(event)">
+                            <div id="authNameWrap" class="hide"><label>Nome</label><input id="authName" autocomplete="name"></div>
+                            <div><label>E-mail</label><input id="authEmail" type="email" autocomplete="email" required></div>
+                            <div><label>Senha</label><input id="authPassword" type="password" minlength="6" autocomplete="current-password" required></div>
+                            <button class="btn primary" id="authSubmit" type="submit">Entrar</button>
+                        </form>
+                        <div class="auth-switch"><span id="authSwitchText">Ainda não tem conta?</span><button type="button" onclick="toggleAuthMode()" id="authSwitchBtn">Criar conta</button></div>
+                        <div id="authError" class="note hide" style="margin-top:12px;color:#ff9aa5"></div>
+                        <div class="preview"><div class="preview-row"><span>Dashboard</span><strong>Visão geral</strong></div><div class="preview-row"><span>Orçamentos</span><strong>PDF + histórico</strong></div><div class="preview-row"><span>Pedidos</span><strong>Fluxo completo</strong></div></div>
+                    </div>
+                </div>
+                <div class="landing-foot">ForwardPro Cloud · Gestão de redirecionamentos China → Brasil</div>
+            </div>
+        </div>
+    </div>
+    <div class="app">
+        <aside class="side">
+            <div class="brand">Forward<span>Pro</span></div>
+            <div class="navlabel">Menu principal</div>
+            <nav class="nav">
+                <button class="active" data-page="dashboard">🏠 &nbsp; Dashboard</button>
+                <button data-page="calculator">➕ &nbsp; Novo Orçamento</button>
+                <button data-page="quotes">🧾 &nbsp; Orçamentos</button>
+                <button data-page="clients">👥 &nbsp; Clientes</button>
+                <button data-page="orders">📮 &nbsp; Pedidos</button>
+                <button data-page="freights">📦 &nbsp; Fretes</button>
+                <button data-page="reports">📊 &nbsp; Relatórios</button>
+                <button data-page="activity">📋 &nbsp; Atividades</button>
+                <button data-page="settings">⚙ &nbsp; Configurações</button>
+                <button data-page="admin" id="adminNav" class="hide">👑 &nbsp; Administração</button>
+            </nav>
+            <div class="sidebottom">
+                <div class="sidecard"><b style="color:white">ForwardPro</b>
+                    <br>Gestão de redirecionamentos China → Brasil.</div>
+            </div>
+        </aside>
+        <main class="main">
+            <header class="top">
+                <div>
+                    <div class="title" id="pageTitle">Dashboard</div>
+                    <div class="subtitle">Central de operações</div>
+                </div>
+                <div class="userbox">
+                    <div class="top-actions"><button class="btn theme-toggle" id="themeToggle" title="Alternar tema" onclick="toggleTheme()">☾</button></div>
+                    <div class="usertext"><b id="userName">Visitante</b><small id="userEmail">Faça login</small></div>
+                    <div class="avatar" id="userAvatar">FP</div>
+                    <button class="btn logout-btn" onclick="logout()">Sair</button>
+                </div>
+            </header>
+            <section id="page-dashboard" class="page active">
+                <div class="content">
+                    <div class="hero">
+                        <div class="eyebrow">Central de operações</div>
+                        <h1>Seu redirecionamento, <span style="color:#8e9aff">mais simples.</span></h1>
+                        <p>Gerencie clientes, orçamentos e pedidos em um só lugar. O ForwardPro centraliza clientes, fretes, orçamentos e pedidos em PostgreSQL, com histórico e ferramentas para sua operação.</p>
+                        <div class="actions">
+                            <button class="btn primary" onclick="go('calculator')">＋ Novo Orçamento</button>
+                            <button class="btn" onclick="go('clients')">Cadastrar cliente</button>
+                        </div>
+                    </div>
+                    <div class="quick-grid">
+                        <div class="quick" onclick="go('calculator')"><div class="qi">＋</div><b>Novo Orçamento</b><span>Calcule e envie um orçamento.</span></div>
+                        <div class="quick" onclick="go('clients')"><div class="qi">♙</div><b>Novo cliente</b><span>Cadastre e organize seus clientes.</span></div>
+                        <div class="quick" onclick="go('orders')"><div class="qi">▣</div><b>Pedidos</b><span>Acompanhe cada etapa.</span></div>
+                        <div class="quick" onclick="go('reports')"><div class="qi">◔</div><b>Relatórios</b><span>Veja desempenho e resultados.</span></div>
+                    </div>
+                    <div class="sectionhead">
+                        <h2>Resumo</h2><span class="muted">Atualizado automaticamente</span></div>
+                    <div class="stats">
+                        <div class="stat"><small>Orçamentos</small><strong id="dQuotes">0</strong><span class="muted">histórico salvo</span></div>
+                        <div class="stat"><small>Clientes</small><strong id="dClients">0</strong><span class="muted">cadastrados</span></div>
+                        <div class="stat"><small>Pedidos</small><strong id="dOrders">0</strong><span class="muted">em acompanhamento</span></div>
+                        <div class="stat"><small>Faturamento</small><strong id="dRevenue">R$ 0,00</strong><span class="green" id="dPaid">R$ 0,00 pagos</span></div>
+                    </div>
+                    <div class="grid2">
+                        <div class="panel">
+                            <h3>Fluxo</h3>
+                            <div class="steps">
+                                <div class="step"><b>01</b>
+                                    <div><span>Monte um orçamento para clientes</span><small>Produtos, peso, câmbio, frete e impostos.</small></div>
+                                </div>
+                                <div class="step"><b>02</b>
+                                    <div><span>Salve o orçamento</span><small>Ela entra automaticamente no histórico.</small></div>
+                                </div>
+                                <div class="step"><b>03</b>
+                                    <div><span>Converta em pedido</span><small>Use o botão “Transformar em pedido”.</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <h3>Últimas movimentações</h3>
+                            <div id="dashRecent" class="muted">Carregando...</div>
+                        </div>
+                    </div>
+                    <div class="feature-grid">
+                        <div class="feature"><div class="icon">⚡</div><h3>Operação rápida</h3><p>Atalhos e fluxos simples para reduzir tarefas repetitivas.</p></div>
+                        <div class="feature"><div class="icon">◈</div><h3>Controle financeiro</h3><p>Visualize custo, margem, lucro e preço final antes de fechar.</p></div>
+                        <div class="feature"><div class="icon">▤</div><h3>Documentos profissionais</h3><p>Gere PDFs de orçamentos com todos os cálculos apresentados ao cliente.</p></div>
+                    </div>
+                </div>
+            </section>
+            <section id="page-calculator" class="page">
+                <div class="content">
+                    <div class="sectionhead">
+                        <h2>Novo Orçamento</h2><span class="muted">Calcule e salve</span></div>
+                    <div class="card">
+                        <h2>1. Cliente e parâmetros</h2>
+                        <div class="formgrid three">
+                            <div>
+                                <label>Cliente</label>
+                                <select id="qClient">
+                                    <option value="">Cliente não informado</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Câmbio CNY → BRL</label>
+                                <input id="fx" type="number" step="0.0001" value="0.72">
+                            </div>
+                            <div>
+                                <label>Margem de lucro (%)</label>
+                                <input id="profit" type="number" step="0.1" value="15">
+                            </div>
+                        </div>
+                        <div class="formgrid three" style="margin-top:11px">
+                            <div>
+                                <label>Taxa operacional (%)</label>
+                                <input id="service" type="number" step="0.1" value="0">
+                            </div>
+                            <div>
+                                <label>Imposto de importação (%)</label>
+                                <input id="importTax" type="number" step="0.1" value="0">
+                            </div>
+                            <div>
+                                <label>ICMS / adicional (%)</label>
+                                <input id="icms" type="number" step="0.1" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h2>2. Produtos</h2>
+                        <div class="formgrid three">
+                            <div>
+                                <label>Produto</label>
+                                <input id="pname" placeholder="Ex.: Tênis">
+                            </div>
+                            <div>
+                                <label>Preço unitário (CNY)</label>
+                                <input id="pprice" type="number" step="0.01" value="0">
+                            </div>
+                            <div>
+                                <label>Quantidade</label>
+                                <input id="pqty" type="number" min="1" value="1">
+                            </div>
+                        </div>
+                        <div class="formgrid three" style="margin-top:11px">
+                            <div>
+                                <label>Peso unitário (g)</label>
+                                <input id="pweight" type="number" min="0" value="0">
+                            </div>
+                            <div>
+                                <label>Dimensões (cm), opcional</label>
+                                <input id="pdims" placeholder="30x20x10">
+                            </div>
+                            <div style="display:flex;align-items:end">
+                                <button class="btn primary" style="width:100%" onclick="addProduct()">＋ Adicionar produto</button>
+                            </div>
+                        </div>
+                        <div class="tablewrap" style="margin-top:14px">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Produto</th>
+                                        <th>Qtd.</th>
+                                        <th>Valor</th>
+                                        <th>Peso</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="products"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h2>3. Adicionais do pacote</h2>
+                        <div class="formgrid three">
+                            <div><label>Descrição</label><input id="extraDesc" placeholder="Ex.: embalagem reforçada"></div>
+                            <div><label>Valor (R$)</label><input id="extraValue" type="number" step="0.01" value="0"></div>
+                            <div style="display:flex;align-items:end"><button class="btn primary" style="width:100%" onclick="addExtra()">＋ Adicionar adicional</button></div>
+                        </div>
+                        <div id="extrasList" class="freights" style="margin-top:12px"></div>
+                        <div class="formgrid" style="margin-top:12px"><div style="grid-column:1/-1"><label>Observações do Orçamento</label><textarea id="qNotes" rows="3" placeholder="Informações para o cliente ou para sua operação"></textarea></div></div>
+                    </div>
+                    <div class="card">
+                        <h2>4. Frete</h2>
+                        <div class="formgrid three">
+                            <div>
+                                <label>Pesquisar linha</label>
+                                <input id="fsearch" placeholder="EUB, FJ...">
+                            </div>
+                            <div>
+                                <label>Ordenar</label>
+                                <select id="fsort">
+                                    <option value="price">Menor preço</option>
+                                    <option value="time">Menor prazo</option>
+                                    <option value="name">Nome</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Categoria</label>
+                                <select id="fcat">
+                                    <option value="ordinary">Mercadoria comum</option>
+                                    <option value="electric">Eletrônico</option>
+                                    <option value="liquid">Líquido</option>
+                                    <option value="battery">Bateria</option>
+                                    <option value="shoes">Calçados</option>
+                                    <option value="cosmetics">Cosméticos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="actions" style="margin-top:13px;align-items:center">
+                            <button class="btn primary" onclick="loadLocalFreights()">↻ Calcular fretes cadastrados</button>
+                            <span id="cssbuyStatus" class="muted">Os fretes são gerenciados por você. Nenhuma conta CSSBuy é necessária.</span>
+                        </div>
+                        <div id="freightList" class="freights" style="margin-top:13px"></div>
+                        <div id="freightDetails" class="note hide" style="margin-top:10px"></div>
+                    </div>
+                    <div class="grid2">
+                        <div class="card">
+                            <h2>Resumo da cobrança</h2>
+                            <div class="kpis">
+                                <div class="kpi"><small>Produtos</small><strong id="rProducts">R$ 0,00</strong></div>
+                                <div class="kpi"><small>Frete</small><strong id="rFreight">R$ 0,00</strong></div>
+                                <div class="kpi"><small>Impostos</small><strong id="rTax">R$ 0,00</strong></div>
+                                <div class="kpi"><small>Peso</small><strong id="rWeight">0 g</strong></div>
+                            </div>
+                            <div style="margin-top:16px">
+                                <div class="muted">Preço final para o cliente</div>
+                                <div class="quote-total" id="rFinal">R$ 0,00</div>
+                                <div class="muted" id="rProfit">Lucro estimado: R$ 0,00</div>
+                            </div>
+                            <div class="actions">
+                                <button class="btn primary" onclick="saveQuote()">Salvar Orçamento</button>
+                                <button class="btn" onclick="copyQuote()">Copiar orçamento</button>
+                                <button class="btn" onclick="newQuote()">Limpar</button>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <h3>Como funciona</h3>
+                            <div class="note">O Orçamento é salva no PostgreSQL. Depois, em Orçamentos, você pode visualizar os detalhes ou transformá-la em um pedido.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="page-quotes" class="page">
+                <div class="content">
+                    <div class="sectionhead">
+                        <h2>Orçamentos</h2><span class="muted">Histórico completo</span></div>
+                    <div class="panel">
+                        <div class="toolbar">
+                            <input id="quoteSearch" placeholder="Pesquisar cliente ou ID" style="max-width:320px">
+                            <button class="btn" onclick="go('calculator')">＋ Novo Orçamento</button>
+                        </div>
+                        <div id="quotesTable"></div>
+                    </div>
+                </div>
+            </section>
+            <section id="page-clients" class="page">
+                <div class="content">
+                    <div class="sectionhead">
+                        <h2>Clientes</h2><span class="muted">Cadastro persistente</span></div>
+                    <div class="panel">
+                        <div class="toolbar"><span class="muted">Os dados ficam armazenados no PostgreSQL do servidor e vinculados à sua conta.</span>
+                            <button class="btn primary" onclick="openClient()">＋ Novo cliente</button>
+                        </div>
+                        <div id="clientsTable"></div>
+                    </div>
+                </div>
+            </section>
+            <section id="page-orders" class="page">
+                <div class="content">
+                    <div class="sectionhead">
+                        <h2>Pedidos</h2><span class="muted">Operações convertidas de orçamentos</span></div>
+                    <div class="panel">
+                        <div id="ordersTable"></div>
+                    </div>
+                </div>
+            </section>
+            <section id="page-freights" class="page">
+                <div class="content">
+                    <div class="sectionhead"><h2>Fretes</h2><span class="muted">Catálogo próprio — sem token ou sessão da CSSBuy</span></div>
+                    <div class="panel"><div class="toolbar"><span class="muted">Cadastre suas tabelas de preço e marque os favoritos usados na calculadora.</span><button class="btn primary" onclick="openFreight()">＋ Novo frete</button></div><div id="freightPage"></div></div>
+                </div>
+            </section>
+            <section id="page-admin" class="page">
+                <div class="content">
+                    <div class="sectionhead">
+                        <h2>Administração</h2><span class="muted">Controle global do ForwardPro</span></div>
+                    <div class="stats">
+                        <div class="stat"><small>Usuários</small><strong id="aUsers">0</strong></div>
+                        <div class="stat"><small>Orçamentos</small><strong id="aQuotes">0</strong></div>
+                        <div class="stat"><small>Pedidos</small><strong id="aOrders">0</strong></div>
+                        <div class="stat"><small>Faturamento</small><strong id="aRevenue">R$ 0,00</strong></div>
+                    </div>
+                    <div class="grid2" style="margin-top:14px">
+                        <div class="panel">
+                            <h3>Usuários</h3>
+                            <div id="adminUsers"></div>
+                        </div>
+                        <div class="panel">
+                            <h3>Últimos pedidos</h3>
+                            <div id="adminOrders"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="page-reports" class="page"><div class="content"><div class="sectionhead"><h2>Relatórios</h2><span class="muted">Visão financeira da sua operação</span></div><div class="stats"><div class="stat"><small>Faturamento</small><strong id="rRevenue">R$ 0,00</strong><span class="muted">pedidos registrados</span></div><div class="stat"><small>Ticket médio</small><strong id="rTicket">R$ 0,00</strong><span class="muted">por pedido</span></div><div class="stat"><small>Pedidos concluídos</small><strong id="rDone">0</strong><span class="muted">finalizados</span></div><div class="stat"><small>Conversão</small><strong id="rConversion">0%</strong><span class="muted">Orçamentos → pedidos</span></div></div><div class="grid2"><div class="panel"><h3>Resumo de status</h3><div id="reportStatuses" class="steps"></div></div><div class="panel"><h3>Clientes com mais pedidos</h3><div id="reportClients" class="steps"></div></div></div></div></section>
+<section id="page-activity" class="page"><div class="content"><div class="sectionhead"><h2>Central de atividades</h2><span class="muted">Últimas movimentações</span></div><div class="panel"><div id="activityList" class="steps"></div></div></div></section>
+<section id="page-settings" class="page"><div class="content"><div class="sectionhead"><h2>Configurações</h2><span class="muted">Personalize o ForwardPro</span></div><div class="grid2"><div><div class="setting-group"><h3>Aparência</h3><div class="setting-row"><div><b>Modo escuro</b><small>Use a interface escura ou clara.</small></div><label class="switch"><input id="darkModeSwitch" type="checkbox" checked onchange="setTheme(this.checked?'dark':'light')"><span class="slider"></span></label></div><div class="setting-row"><div><b>Animações</b><small>Transições suaves entre telas e cartões.</small></div><label class="switch"><input id="motionSwitch" type="checkbox" checked onchange="setMotion(this.checked)"><span class="slider"></span></label></div></div><div class="setting-group"><h3>Calculadora</h3><div class="formgrid"><div><label>Margem padrão (%)</label><input id="defaultProfit" type="number" value="15" step="0.1"></div><div><label>Câmbio padrão CNY → BRL</label><input id="defaultFx" type="number" value="0.72" step="0.0001"></div><div><label>Imposto de importação padrão (%)</label><input id="defaultImportTax" type="number" value="0" step="0.1"></div><div><label>ICMS padrão (%)</label><input id="defaultIcms" type="number" value="0" step="0.1"></div></div><div class="actions"><button class="btn primary" onclick="saveAdvancedSettings()">Salvar preferências</button></div></div></div><div><div class="setting-group"><h3>Perfil</h3><div class="note"><b id="settingsUserName">Usuário</b><br><span id="settingsUserEmail">—</span><br><span class="muted">Perfil: <span id="settingsRole">—</span></span></div></div><div class="setting-group"><h3>Dados</h3><p class="muted">Os dados ficam armazenados no PostgreSQL do servidor e isolados por usuário autenticado.</p><div class="actions"><button class="btn" onclick="exportLocalSettings()">Exportar preferências</button><button class="btn danger" onclick="clearDB()">Apagar meus dados</button></div></div><div class="setting-group"><h3>Atalhos</h3><div class="setting-row"><div><b>Novo Orçamento</b><small>Ctrl + K</small></div><span class="tag">Ctrl K</span></div><div class="setting-row"><div><b>Alternar tema</b><small>Ctrl + J</small></div><span class="tag">Ctrl J</span></div></div></div></div></div></section>
+        </main>
+    </div>
+    <div id="clientModal" class="modal">
+        <div class="modalbox">
+            <div class="modalhead">
+                <h3>Novo cliente</h3>
+                <button class="btn" onclick="closeModal('clientModal')">×</button>
+            </div>
+            <div class="formgrid">
+                <div><label>Nome</label><input id="cName"></div>
+                <div><label>WhatsApp</label><input id="cPhone"></div>
+                <div><label>E-mail</label><input id="cEmail" type="email"></div>
+                <div><label>CPF/CNPJ</label><input id="cCpf"></div>
+                <div style="grid-column:1/-1"><label>Endereço</label><input id="cAddress"></div>
+                <div><label>Cidade</label><input id="cCity"></div>
+                <div><label>Estado</label><input id="cState" maxlength="2"></div>
+                <div><label>CEP</label><input id="cZip"></div>
+                <div style="grid-column:1/-1"><label>Descrição / observação</label><textarea id="cNote" rows="3"></textarea></div>
+            </div>
+            <div class="actions">
+                <button class="btn" onclick="closeModal('clientModal')">Cancelar</button>
+                <button class="btn primary" onclick="saveClient()">Salvar</button>
+            </div>
+        </div>
+    </div>
+    <div id="freightModal" class="modal">
+        <div class="modalbox">
+            <div class="modalhead"><h3 id="freightModalTitle">Novo frete</h3><button class="btn" onclick="closeModal('freightModal')">×</button></div>
+            <div class="formgrid three">
+                <div><label>Nome</label><input id="frName"></div><div><label>Código</label><input id="frCode"></div><div><label>País</label><input id="frCountry" value="Brasil"></div>
+                <div><label>Peso mínimo (g)</label><input id="frMin" type="number" step="0.001" value="0"></div><div><label>Peso máximo (g)</label><input id="frMax" type="number" step="0.001" value="0"></div><div><label>Prazo</label><input id="frTime" placeholder="20–30 dias"></div>
+                <div><label>Primeiro peso (g)</label><input id="frFirstWeight" type="number" step="0.001" value="100"></div><div><label>Valor 1º peso (CNY)</label><input id="frFirstFee" type="number" step="0.01" value="0"></div><div><label>Peso adicional (g)</label><input id="frNextWeight" type="number" step="0.001" value="100"></div>
+                <div><label>Valor adicional (CNY)</label><input id="frNextFee" type="number" step="0.01" value="0"></div><div><label>Seguro (CNY)</label><input id="frInsurance" type="number" step="0.01" value="0"></div><div style="display:flex;align-items:center;gap:8px;padding-top:18px"><input id="frFavorite" type="checkbox" style="width:auto"><label style="margin:0">Favorito</label></div>
+                <div style="grid-column:1/-1"><label>Descrição</label><textarea id="frDesc" rows="3"></textarea></div>
+            </div>
+            <div class="actions"><button class="btn" onclick="closeModal('freightModal')">Cancelar</button><button class="btn primary" onclick="saveFreight()">Salvar frete</button></div>
+        </div>
+    </div>
+    <div id="detailModal" class="modal">
+        <div class="modalbox">
+            <div class="modalhead">
+                <h3 id="detailTitle">Detalhes</h3>
+                <button class="btn" onclick="closeModal('detailModal')">×</button>
+            </div>
+            <div id="detailBody"></div>
+        </div>
+    </div>
+    <div id="messageModal" class="modal">
+        <div class="modalbox" style="width:min(760px,100%)">
+            <div class="modalhead">
+                <div>
+                    <h3 style="margin:0">Mensagem para o cliente</h3>
+                    <div class="muted" style="margin-top:4px">Revise e personalize antes de enviar.</div>
+                </div>
+                <button class="btn" onclick="closeModal('messageModal')">×</button>
+            </div>
+            <div class="note" style="margin-bottom:12px">A mensagem abaixo é gerada automaticamente com os dados do orçamento e pode ser editada livremente.</div>
+            <textarea id="clientMessage" rows="18" style="resize:vertical;line-height:1.6"></textarea>
+            <div class="actions">
+                <button class="btn primary" onclick="copyClientMessage()">Copiar mensagem</button>
+                <button class="btn" onclick="openClientWhatsApp()">Abrir WhatsApp</button>
+                <button class="btn" onclick="generateClientMessage(currentMessageQuote)">Regenerar</button>
+                <button class="btn" onclick="closeModal('messageModal')">Fechar</button>
+            </div>
+        </div>
+    </div>
+    <script>
+const API='/api';
+let products=[], selectedFreight=null, extras=[], freights=[];
+let authMode='login', currentUser=null, quoteCache=[], clientCache=[], orderCache=[], currentMessageQuote=null;
+let editingClientId=null, editingQuoteId=null, editingFreightId=null;
+const $=id=>document.getElementById(id);
+const money=v=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(v)||0);
+const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+async function api(path,options={}){const token=localStorage.getItem('forwardpro_token');const headers={'Content-Type':'application/json',...(options.headers||{})};if(token)headers.Authorization='Bearer '+token;let r;try{r=await fetch(API+path,{...options,headers})}catch(e){throw new Error('Não foi possível conectar ao servidor. Verifique se o npm start está rodando.')}if(r.status===401){logout(false);throw new Error('Sessão expirada. Faça login novamente.')}if(r.status===204)return null;const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||'Erro de comunicação com o servidor');return data}
+function authData(data){localStorage.setItem('forwardpro_token',data.token);currentUser=data.user;document.body.classList.remove('auth-locked');$('adminNav').classList.toggle('hide',data.user.role!=='admin');$('userName').textContent=data.user.name;$('userEmail').textContent=data.user.email;$('userAvatar').textContent=(data.user.name||'FP').slice(0,2).toUpperCase()}
+function showAuthError(msg){$('authError').textContent=msg;$('authError').classList.remove('hide')}
+function toggleAuthMode(){authMode=authMode==='login'?'register':'login';$('authTitle').textContent=authMode==='login'?'Entrar na sua conta':'Criar sua conta';$('authSub').textContent=authMode==='login'?'Acesse clientes, orçamentos e pedidos de qualquer dispositivo.':'Crie seu acesso para usar o ForwardPro.';$('authNameWrap').classList.toggle('hide',authMode==='login');$('authName').required=authMode==='register';$('authSubmit').textContent=authMode==='login'?'Entrar':'Criar conta';$('authSwitchText').textContent=authMode==='login'?'Ainda não tem conta?':'Já possui uma conta?';$('authSwitchBtn').textContent=authMode==='login'?'Criar conta':'Entrar';$('authError').classList.add('hide')}
+async function submitAuth(e){e.preventDefault();try{const body={email:$('authEmail').value.trim(),password:$('authPassword').value};if(authMode==='register')body.name=$('authName').value.trim();const data=await api(authMode==='login'?'/auth/login':'/auth/register',{method:'POST',body:JSON.stringify(body)});authData(data);await refresh();go('dashboard');toast(authMode==='login'?'Login realizado':'Conta criada')}catch(err){showAuthError(err.message)}}
+function logout(reload=true){localStorage.removeItem('forwardpro_token');currentUser=null;document.body.classList.add('auth-locked');if(reload)toggleAuthMode()}
+async function bootAuth(){const token=localStorage.getItem('forwardpro_token');if(!token)return;try{const data=await api('/auth/me');authData({user:data.user,token});await refresh()}catch{localStorage.removeItem('forwardpro_token')}}
+function go(page){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));$('page-'+page).classList.add('active');$('pageTitle').textContent={dashboard:'Dashboard',calculator:editingQuoteId?'Editar Orçamento':'Novo Orçamento',quotes:'Orçamentos',clients:'Clientes',orders:'Pedidos',freights:'Fretes',reports:'Relatórios',activity:'Atividades',settings:'Configurações',admin:'Administração'}[page]||page;if(page==='quotes')renderQuotes();if(page==='clients')renderClients();if(page==='orders')renderOrders();if(page==='freights')renderFreightPage();if(page==='reports')renderReports();if(page==='activity')renderActivity();if(page==='settings')syncSettingsUI();if(page==='admin')loadAdmin();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.page));
+async function all(store){return api('/'+store)}
+async function del(store,id){return api('/'+store+'/'+id,{method:'DELETE'})}
+function closeModal(id){$(id).classList.remove('open')}
+function resetClientForm(){editingClientId=null;$('cName').value='';$('cPhone').value='';$('cEmail').value='';$('cCpf').value='';$('cAddress').value='';$('cCity').value='';$('cState').value='';$('cZip').value='';$('cNote').value='';$('clientModal').querySelector('h3').textContent='Novo cliente'}
+function openClient(client=null){editingClientId=client?.id||null;$('cName').value=client?.name||'';$('cPhone').value=client?.phone||'';$('cEmail').value=client?.email||'';$('cCpf').value=client?.cpfCnpj||'';$('cAddress').value=client?.address||'';$('cCity').value=client?.city||'';$('cState').value=client?.state||'';$('cZip').value=client?.zip||'';$('cNote').value=client?.note||'';$('clientModal').querySelector('h3').textContent=editingClientId?'Editar cliente':'Novo cliente';$('clientModal').classList.add('open');$('cName').focus()}
+async function saveClient(){const name=$('cName').value.trim();if(!name)return alert('Informe o nome.');const body={name,phone:$('cPhone').value.trim(),email:$('cEmail').value.trim(),cpfCnpj:$('cCpf').value.trim(),address:$('cAddress').value.trim(),city:$('cCity').value.trim(),state:$('cState').value.trim(),zip:$('cZip').value.trim(),note:$('cNote').value.trim()};try{if(editingClientId)await api('/clients/'+editingClientId,{method:'PATCH',body:JSON.stringify(body)});else await api('/clients',{method:'POST',body:JSON.stringify(body)});closeModal('clientModal');resetClientForm();await refresh();go('clients');toast(editingClientId?'Cliente atualizado':'Cliente cadastrado')}catch(e){alert(e.message)}}
+async function deleteClient(id){if(confirm('Excluir este cliente?')){try{await del('clients',id);await refresh();toast('Cliente removido')}catch(e){alert(e.message)}}}
+async function loadClients(){const cs=await all('clients');clientCache=cs;$('qClient').innerHTML='<option value="">Cliente não informado</option>'+cs.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('')}
+async function renderClients(){const cs=await all('clients');clientCache=cs;$('clientsTable').innerHTML=cs.length?`<div class="tablewrap"><table class="table"><thead><tr><th>Cliente</th><th>Contato</th><th>Local</th><th>Cadastro</th><th></th></tr></thead><tbody>${cs.map(c=>`<tr><td><b>${esc(c.name)}</b><div class="muted">${esc(c.note||'')}</div></td><td>${esc(c.phone||'—')}<div class="muted">${esc(c.email||'')}</div></td><td>${esc([c.city,c.state].filter(Boolean).join(' / ')||'—')}</td><td>${new Date(c.created).toLocaleDateString('pt-BR')}</td><td><button class="btn" onclick='openClient(${JSON.stringify(c).replace(/'/g,"&#39;")})'>Editar</button> <button class="btn danger" onclick="deleteClient('${c.id}')">Excluir</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Nenhum cliente cadastrado.</div>'}
+function addProduct(){const name=$('pname').value.trim()||'Produto',price=+$('pprice').value||0,qty=Math.max(1,+$('pqty').value||1),weight=Math.max(0,+$('pweight').value||0),dims=$('pdims').value.trim();products.push({name,price,qty,weight,dims});['pname','pdims'].forEach(id=>$(id).value='');$('pprice').value='0';$('pqty').value='1';$('pweight').value='0';renderProducts();calc();if(products.length===1)loadLocalFreights()}
+function removeProduct(i){products.splice(i,1);selectedFreight=null;renderProducts();calc();loadLocalFreights()}
+function renderProducts(){$('products').innerHTML=products.map((p,i)=>`<tr><td>${esc(p.name)}</td><td>${p.qty}</td><td>¥ ${(p.price*p.qty).toFixed(2)}</td><td>${p.weight*p.qty}g</td><td><button class="btn" onclick="removeProduct(${i})">×</button></td></tr>`).join('')||'<tr><td colspan="5" class="muted">Nenhum produto.</td></tr>'}
+function totalWeight(){return products.reduce((s,p)=>s+Math.max(0,Number(p.weight)||0)*Math.max(1,Number(p.qty)||1),0)}
+function totalVolume(){return products.reduce((s,p)=>{const parts=String(p.dims||'').toLowerCase().replace(/,/g,'.').split(/[x×*]/).map(Number).filter(Number.isFinite);return s+(parts.length===3?parts.reduce((a,b)=>a*b,1):0)*Math.max(1,Number(p.qty)||1)},0)}
+function freightCost(){if(!selectedFreight)return{bill:totalWeight(),cny:0};return{bill:totalWeight(),cny:Number(selectedFreight.totalCny||0)}}
+async function loadLocalFreights(){const weight=totalWeight();if(!weight){$('cssbuyStatus').textContent='Adicione produtos com peso para calcular.';$('freightList').innerHTML='<div class="empty">Informe o peso dos produtos.</div>';return}$('cssbuyStatus').textContent='Calculando com sua tabela de fretes...';$('freightList').innerHTML='<div class="empty">Calculando...</div>';try{const data=await api('/freights/calculate',{method:'POST',body:JSON.stringify({weight})});freights=data.freights||[];selectedFreight=freights.find(f=>f.is_favorite)||freights[0]||null;renderFreights();if(selectedFreight)selectFreight(selectedFreight.id);else{$('freightDetails').classList.add('hide');calc();$('cssbuyStatus').textContent='Nenhum frete cadastrado para este peso.'}}catch(e){$('freightList').innerHTML=`<div class="empty">${esc(e.message)}</div>`}}
+function renderFreights(){const q=($('fsearch').value||'').toLowerCase();let list=freights.filter(f=>(f.name+' '+(f.code||'')).toLowerCase().includes(q));const sort=$('fsort').value;if(sort==='name')list.sort((a,b)=>a.name.localeCompare(b.name));if(sort==='price')list.sort((a,b)=>Number(a.totalCny)-Number(b.totalCny));$('freightList').innerHTML=list.map(f=>`<div class="freight ${selectedFreight?.id===f.id?'active':''}" onclick="selectFreight('${f.id}')"><div style="display:flex;justify-content:space-between;gap:12px"><b>${f.is_favorite?'⭐ ':''}${esc(f.name)}</b><strong>¥ ${Number(f.totalCny||0).toFixed(2)}</strong></div><span class="muted">${esc(f.travel_time||'Prazo não informado')} • ${esc(f.code||'')}</span><div class="meta"><span class="tag">1º ¥${Number(f.first_fee||0).toFixed(2)}/${Number(f.first_weight||0)}g</span><span class="tag">+ ¥${Number(f.continue_fee||0).toFixed(2)}/${Number(f.continue_weight||0)}g</span><span class="tag">máx. ${Number(f.max_weight||0)}g</span></div></div>`).join('')||'<div class="empty">Nenhum frete encontrado.</div>'}
+function selectFreight(id){selectedFreight=freights.find(f=>String(f.id)===String(id));if(!selectedFreight)return;renderFreights();$('freightDetails').classList.remove('hide');$('freightDetails').innerHTML=`<b>${esc(selectedFreight.name)}</b><br>Custo calculado: <b>¥${Number(selectedFreight.totalCny||0).toFixed(2)}</b><br>Prazo: ${esc(selectedFreight.travel_time||'Não informado')}<br>1º peso: ¥${Number(selectedFreight.first_fee||0).toFixed(2)} / ${Number(selectedFreight.first_weight||0)}g<br>Adicional: ¥${Number(selectedFreight.continue_fee||0).toFixed(2)} / ${Number(selectedFreight.continue_weight||0)}g<br>${esc(selectedFreight.description||'')}`;calc()}
+function addExtra(){const description=$('extraDesc').value.trim();const value=Number($('extraValue').value)||0;if(!description)return alert('Informe a descrição.');extras.push({description,value});$('extraDesc').value='';$('extraValue').value='0';renderExtras();calc()}
+function removeExtra(i){extras.splice(i,1);renderExtras();calc()}
+function renderExtras(){$('extrasList').innerHTML=extras.map((x,i)=>`<div class="freight"><div style="display:flex;justify-content:space-between"><span>${esc(x.description)}</span><b>${money(x.value)}</b></div><button class="btn" style="margin-top:8px" onclick="removeExtra(${i})">Remover</button></div>`).join('')||'<div class="muted">Nenhum adicional.</div>'}
+function calc(){const fx=+$('fx').value||0,profit=(+$('profit').value||0)/100,service=(+$('service').value||0)/100,tax=(+$('importTax').value||0)/100,icms=(+$('icms').value||0)/100,prod=products.reduce((s,p)=>s+p.price*p.qty,0)*fx,fr=freightCost(),freight=fr.cny*fx,extraTotal=extras.reduce((s,x)=>s+Number(x.value||0),0),base=prod+freight+extraTotal,importValue=base*tax,icmsValue=(base+importValue)*icms,taxes=importValue+icmsValue,subtotal=base+taxes,serviceValue=subtotal*service,afterService=subtotal+serviceValue,profitValue=afterService*profit,final=afterService+profitValue;$('rProducts').textContent=money(prod);$('rFreight').textContent=money(freight);$('rTax').textContent=money(taxes);$('rWeight').textContent=fr.bill+' g';$('rFinal').textContent=money(final);$('rProfit').textContent='Lucro estimado: '+money(profitValue);return{prod,freight,extraTotal,base,importValue,icmsValue,taxes,subtotal,serviceValue,afterService,profitValue,final,lucro:profitValue,weight:fr.bill}}
+function quoteSnapshot(){const s=calc();return{clientId:$('qClient').value||null,products:products.map(p=>({...p})),freight:selectedFreight?{...selectedFreight}:null,extras:extras.map(x=>({...x})),notes:$('qNotes').value.trim(),fx:+$('fx').value||0,profit:+$('profit').value||0,service:+$('service').value||0,importTax:+$('importTax').value||0,icms:+$('icms').value||0,totalText:$('rFinal').textContent,weight:s.weight}}
+async function saveQuote(){if(!products.length)return alert('Adicione pelo menos um produto.');try{const s=quoteSnapshot();if(editingQuoteId){await api('/quotes/'+editingQuoteId,{method:'PATCH',body:JSON.stringify(s)});toast('Orçamento atualizado')}else{await api('/quotes',{method:'POST',body:JSON.stringify(s)});toast('Orçamento salvo no banco de dados!')}editingQuoteId=null;newQuote(false);await refresh();go('quotes')}catch(e){alert(e.message)}}
+async function convertToOrder(id){try{await api('/quotes/'+id+'/convert',{method:'POST'});toast('Orçamento transformado em pedido');await refresh();closeModal('detailModal')}catch(e){alert(e.message)}}
+async function viewQuote(id){
+  try{
+    const q=await api('/quotes/'+id);
+    const productsQ=Array.isArray(q.products)?q.products:[];
+    const extrasQ=Array.isArray(q.extras)?q.extras:[];
+    const freight=q.freight||{};
+    const insurance=Number(freight.insuranceFee??freight.insurance_fee??0);
+    const productRows=productsQ.map(p=>{
+      const qty=Number(p.qty||0), price=Number(p.price||0), weight=Number(p.weight||0);
+      return `<tr><td>${esc(p.name)}</td><td>${qty}x</td><td>¥ ${(price*qty).toFixed(2)}</td><td>${(weight*qty).toFixed(2).replace('.',',')}g</td></tr>`;
+    }).join('');
+    const extraHtml=extrasQ.length?'<h3>Adicionais</h3>'+extrasQ.map(x=>`<div class="note" style="margin-bottom:6px">${esc(x.description)} — ${money(x.value)}</div>`).join(''):'';
+    const notesHtml=q.notes?`<h3>Observações</h3><div class="note">${esc(q.notes)}</div>`:'';
+    const convertBtn=q.status==='Orçamento'?`<button class="btn primary" onclick="closeModal('detailModal');convertToOrder('${q.id}')">Transformar em pedido</button>`:'';
+    $('detailTitle').textContent=q.code||q.id;
+    $('detailBody').innerHTML=`
+      <div class="note"><b>Cliente:</b> ${esc(q.client_name||'Não informado')}<br>
+      <b>Status:</b> ${esc(q.status)}<br>
+      <b>Data:</b> ${new Date(q.created_at).toLocaleString('pt-BR')}<br>
+      <b>Frete:</b> ${esc(freight.name||'Não selecionado')}<br>
+      <b>Seguro:</b> ${insurance.toFixed(2).replace('.',',')}%<br>
+      <b>Total:</b> ${esc(q.total_text)}</div>
+      <h3 style="margin-top:16px">Produtos</h3>
+      <div class="tablewrap"><table class="table"><tbody>${productRows}</tbody></table></div>
+      ${extraHtml}${notesHtml}
+      <div class="actions">${convertBtn}
+        <button class="btn" onclick="editQuote('${q.id}')">Editar orçamento</button>
+        <button class="btn" onclick="copySavedQuote('${q.id}')">Copiar resumo</button>
+        <button class="btn primary" onclick="openClientMessage('${q.id}')">Criar mensagem</button>
+        <button class="btn" onclick="downloadQuotePdf('${q.id}')">Baixar PDF</button>
+      </div>`;
+    $('detailModal').classList.add('open');
+  }catch(e){alert(e.message)}
+}
+async function editQuote(id){const q=await api('/quotes/'+id);editingQuoteId=id;products=Array.isArray(q.products)?q.products.map(p=>({...p})):[];extras=Array.isArray(q.extras)?q.extras.map(x=>({...x})):[];selectedFreight=q.freight||null;$('qClient').value=q.client_id||'';$('fx').value=q.fx||0;$('profit').value=q.profit||0;$('service').value=q.service||0;$('importTax').value=q.import_tax||0;$('icms').value=q.icms||0;$('qNotes').value=q.notes||'';renderProducts();renderExtras();await loadLocalFreights();if(q.freight)selectedFreight=freights.find(f=>String(f.id)===String(q.freight.id))||q.freight;renderFreights();calc();closeModal('detailModal');go('calculator')}
+async function copySavedQuote(id){const q=await api('/quotes/'+id);const lines=[`FORWARDPRO — ${q.code}`,`Cliente: ${q.client_name||'—'}`,`Frete: ${q.freight?.name||'—'}`,`Peso: ${q.weight_grams||0} g`,`Produtos: ${Array.isArray(q.products)?q.products.length:0}`,`Adicionais: ${Array.isArray(q.extras)?q.extras.reduce((s,x)=>s+Number(x.value||0),0).toFixed(2):'0.00'}`,`TOTAL: ${q.total_text}`];await navigator.clipboard?.writeText(lines.join('\n'));toast('Resumo copiado')}
+async function downloadQuotePdf(id){try{const token=localStorage.getItem('forwardpro_token');const r=await fetch(API+'/quotes/'+id+'/pdf',{headers:{Authorization:'Bearer '+token}});if(!r.ok){const d=await r.json().catch(()=>({}));throw new Error(d.error||'Falha ao gerar PDF.')}const blob=await r.blob();const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ForwardPro-'+id+'.pdf';a.click();URL.revokeObjectURL(a.href);toast('PDF gerado')}catch(e){alert(e.message)}}
+async function renderQuotes(){const qs=await all('quotes');quoteCache=qs;const term=($('quoteSearch').value||'').toLowerCase();const list=qs.filter(q=>(q.id+' '+(q.code||'')+' '+(q.clientName||'')+' '+(q.status||'')).toLowerCase().includes(term));$('quotesTable').innerHTML=list.length?`<div class="tablewrap"><table class="table"><thead><tr><th>Código</th><th>Cliente</th><th>Frete</th><th>Total</th><th>Status</th><th>Data</th><th></th></tr></thead><tbody>${list.map(q=>`<tr><td><b>${esc(q.code||q.id)}</b></td><td>${esc(q.clientName||'—')}</td><td>${esc(q.freight?.name||'—')}</td><td><b>${esc(q.totalText)}</b></td><td><span class="badge ${q.status==='Convertida'?'green':''}">${esc(q.status)}</span></td><td>${new Date(q.created).toLocaleDateString('pt-BR')}</td><td><button class="btn" onclick="viewQuote('${q.id}')">Abrir</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Nenhum orçamento salvo.</div>'}
+async function renderOrders(){const os=await all('orders');orderCache=os;$('ordersTable').innerHTML=os.length?`<div class="tablewrap"><table class="table"><thead><tr><th>ID</th><th>Orçamento</th><th>Cliente</th><th>Total</th><th>Status</th><th>Data</th><th>Ação</th></tr></thead><tbody>${os.map(o=>`<tr><td><b>${esc(o.code||o.id)}</b></td><td>${esc(o.quoteId||'—')}</td><td>${esc(o.clientName||'—')}</td><td><b>${esc(o.totalText||'R$ 0,00')}</b></td><td><span class="badge orange">${esc(o.status)}</span></td><td>${new Date(o.created).toLocaleDateString('pt-BR')}</td><td><select onchange="changeOrderStatus('${o.id}',this.value)"><option value="">Alterar status</option>${['Pedido','Pago','Compra realizada','Em preparação','Enviado','Em trânsito','Chegou ao Brasil','Finalizado','Cancelado'].map(st=>`<option value="${esc(st)}" ${o.status===st?'selected':''}>${esc(st)}</option>`).join('')}</select></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Nenhum pedido criado. Transforme um orçamento para iniciar.</div>'}
+async function changeOrderStatus(id,status){if(!status)return;try{await api('/orders/'+id+'/status',{method:'PATCH',body:JSON.stringify({status})});toast('Status do pedido atualizado');await refresh()}catch(e){alert(e.message)}}
+function resetFreightForm(){editingFreightId=null;['frName','frCode','frCountry','frMin','frMax','frTime','frFirstWeight','frFirstFee','frNextWeight','frNextFee','frInsurance','frDesc'].forEach(id=>$(id).value='');$('frCountry').value='Brasil';$('frFirstWeight').value='100';$('frNextWeight').value='100';$('frFavorite').checked=false;$('freightModalTitle').textContent='Novo frete'}
+function openFreight(f=null){editingFreightId=f?.id||null;$('frName').value=f?.name||'';$('frCode').value=f?.code||'';$('frCountry').value=f?.country||'Brasil';$('frMin').value=f?.min_weight||0;$('frMax').value=f?.max_weight||0;$('frTime').value=f?.travel_time||'';$('frFirstWeight').value=f?.first_weight||100;$('frFirstFee').value=f?.first_fee||0;$('frNextWeight').value=f?.continue_weight||100;$('frNextFee').value=f?.continue_fee||0;$('frInsurance').value=f?.insurance_fee||0;$('frDesc').value=f?.description||'';$('frFavorite').checked=!!f?.is_favorite;$('freightModalTitle').textContent=editingFreightId?'Editar frete':'Novo frete';$('freightModal').classList.add('open')}
+async function saveFreight(){const body={name:$('frName').value.trim(),code:$('frCode').value.trim(),country:$('frCountry').value.trim(),minWeight:+$('frMin').value||0,maxWeight:+$('frMax').value||0,travelTime:$('frTime').value.trim(),firstWeight:+$('frFirstWeight').value||0,firstFee:+$('frFirstFee').value||0,continueWeight:+$('frNextWeight').value||0,continueFee:+$('frNextFee').value||0,insuranceFee:+$('frInsurance').value||0,description:$('frDesc').value.trim(),isFavorite:$('frFavorite').checked,active:true};try{if(editingFreightId)await api('/freights/'+editingFreightId,{method:'PATCH',body:JSON.stringify(body)});else await api('/freights',{method:'POST',body:JSON.stringify(body)});closeModal('freightModal');resetFreightForm();await refresh();toast(editingFreightId?'Frete atualizado':'Frete cadastrado')}catch(e){alert(e.message)}}
+async function deleteFreight(id){if(confirm('Excluir este frete?')){try{await del('freights',id);await refresh();toast('Frete excluído')}catch(e){alert(e.message)}}}
+async function loadFreights(){freights=await api('/freights/all')}
+async function renderFreightPage(){await loadFreights();$('freightPage').innerHTML=freights.length?`<div class="tablewrap"><table class="table"><thead><tr><th>Frete</th><th>Faixa</th><th>Tarifa</th><th>Prazo</th><th></th></tr></thead><tbody>${freights.map(f=>`<tr><td><b>${f.is_favorite?'⭐ ':''}${esc(f.name)}</b><div class="muted">${esc(f.code||'')}</div></td><td>${Number(f.min_weight||0)}–${Number(f.max_weight||0)||'∞'} g</td><td>¥${Number(f.first_fee||0).toFixed(2)} / ${Number(f.first_weight||0)}g + ¥${Number(f.continue_fee||0).toFixed(2)} / ${Number(f.continue_weight||0)}g</td><td>${esc(f.travel_time||'—')}</td><td><button class="btn" onclick='openFreight(${JSON.stringify(f).replace(/'/g,"&#39;")})'>Editar</button> <button class="btn danger" onclick="deleteFreight('${f.id}')">Excluir</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Nenhum frete cadastrado. Clique em “Novo frete” para começar.</div>'}
+async function loadAdmin(){if(currentUser?.role!=='admin')return;const d=await api('/admin/dashboard');$('aUsers').textContent=d.users;$('aQuotes').textContent=d.quotes;$('aOrders').textContent=d.orders;$('aRevenue').textContent=money(Number(d.revenue||0));const us=await api('/admin/users');$('adminUsers').innerHTML='<div class="tablewrap"><table class="table"><thead><tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th></th></tr></thead><tbody>'+us.map(u=>`<tr><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td><span class="badge ${u.role==='admin'?'green':''}">${u.role}</span></td><td>${u.id===currentUser.id?'':`<button class="btn" onclick="adminToggleRole('${u.id}','${u.role==='admin'?'user':'admin'}')">${u.role==='admin'?'Tornar usuário':'Tornar admin'}</button> <button class="btn danger" onclick="adminDeleteUser('${u.id}')">Excluir</button>`}</td></tr>`).join('')+'</tbody></table></div>';const os=await api('/admin/orders');$('adminOrders').innerHTML=os.slice(0,10).map(o=>`<div style="padding:9px 0;border-bottom:1px solid #ffffff0d"><b>${esc(o.code)}</b> · ${esc(o.clientName||'—')}<br><span class="muted">${esc(o.totalText)} · ${esc(o.status)} · ${esc(o.userName)}</span></div>`).join('')||'<span class="muted">Nenhum pedido.</span>'}
+async function adminToggleRole(id,role){try{await api('/admin/users/'+id+'/role',{method:'PATCH',body:JSON.stringify({role})});await loadAdmin();toast('Perfil atualizado')}catch(e){alert(e.message)}}
+async function adminDeleteUser(id){if(!confirm('Excluir este usuário e todos os dados dele?'))return;try{await api('/admin/users/'+id,{method:'DELETE'});await loadAdmin();toast('Usuário excluído')}catch(e){alert(e.message)}}
+async function refresh(){await loadClients();await renderClients();await renderQuotes();await renderOrders();await renderFreightPage();const d=await api('/dashboard');$('dQuotes').textContent=d.quotes;$('dClients').textContent=d.clients;$('dOrders').textContent=d.orders;$('dRevenue').textContent=money(d.revenue);$('dPaid').textContent=d.paid+' pagos';$('dashRecent').innerHTML=quoteCache.slice(0,5).map(q=>`<div style="padding:9px 0;border-bottom:1px solid #ffffff0d"><b>${esc(q.code||q.id)}</b> · ${esc(q.totalText||'R$ 0,00')}<br><span class="muted">${new Date(q.created).toLocaleString('pt-BR')}</span></div>`).join('')||'Nenhum orçamento ainda.';await loadSettings()}
+function newQuote(clear=true){editingQuoteId=null;products=[];selectedFreight=null;extras=[];renderProducts();renderExtras();$('qClient').value='';$('qNotes').value='';$('freightList').innerHTML='';$('freightDetails').classList.add('hide');$('cssbuyStatus').textContent='Os fretes são gerenciados por você. Nenhuma conta CSSBuy é necessária.';calc();if(clear)toast('Orçamento limpo')}
+function copyQuote(){const s=quoteSnapshot();navigator.clipboard?.writeText(`FORWARDPRO — ORÇAMENTO\nCliente: ${$('qClient').selectedOptions[0]?.text||'—'}\nFrete: ${selectedFreight?.name||'—'}\nPeso: ${s.weight}g\nAdicionais: ${money(s.extraTotal||0)}\nTOTAL: ${s.totalText}`);toast('Orçamento copiado')}
+
+function formatPtNumber(v){return Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function generateClientMessage(q){if(!q)return;currentMessageQuote=q;const client=(q.client_name||'').trim();const firstName=client?client.split(/\s+/)[0]:'cliente';const productsQ=Array.isArray(q.products)?q.products:[];const extrasQ=Array.isArray(q.extras)?q.extras:[];const totalWeight=productsQ.reduce((sum,p)=>sum+(Number(p.weight||0)*Number(p.qty||0)),0);const productLines=productsQ.length?productsQ.map(p=>`• ${Number(p.qty||0)}x ${p.name||'Produto'}`).join('\n'):'• Itens do orçamento';const extraLines=extrasQ.length?'\n\n*Adicionais:*\n'+extrasQ.map(x=>`• ${x.description||'Adicional'} — ${money(x.value)}`).join('\n'):'';const freight=q.freight||{};const freightName=freight.name||'Frete selecionado';const freightTime=freight.travel_time||freight.travelTime||'';const weightText=`${formatPtNumber(totalWeight)} g`;const notes=q.notes?`\n\n*Observações:*\n${q.notes}`:'';const timeText=freightTime?`\n*Prazo estimado:* ${freightTime}`:'';const msg=`Olá, ${firstName}! Tudo bem? 😊\n\nPreparei seu orçamento com base nos produtos que você selecionou. Segue o resumo:✨\n\n*FORWARDPRO — ORÇAMENTO ${q.code||''}*\n\n*Produtos:*\n${productLines}\n\n*Peso total:* ${weightText}\n*Frete:* ${freightName}${timeText}${extraLines}\n\n💰 *Valor final do orçamento: ${q.total_text||'R$ 0,00'}*${notes}\n\nEsse valor considera os custos informados no momento do orçamento. Caso queira adicionar, remover ou alterar algum item, me avise que posso atualizar o orçamento para você.\n\nSe estiver tudo certo, posso dar continuidade ao seu pedido. 😊\n\nFico à disposição!`;$('clientMessage').value=msg}
+async function openClientMessage(id){try{const q=await api('/quotes/'+id);generateClientMessage(q);closeModal('detailModal');$('messageModal').classList.add('open');$('clientMessage').focus()}catch(e){alert(e.message)}}
+async function copyClientMessage(){const text=$('clientMessage').value;if(!text)return;try{await navigator.clipboard.writeText(text);toast('Mensagem copiada para o WhatsApp')}catch{const ta=$('clientMessage');ta.select();document.execCommand('copy');toast('Mensagem copiada')}}
+function openClientWhatsApp(){if(!currentMessageQuote)return;let phone=String(currentMessageQuote.phone||'').replace(/\D/g,'');if(!phone){toast('Este cliente não possui WhatsApp cadastrado');return}if(phone.length===10||phone.length===11)phone='55'+phone;const text=encodeURIComponent($('clientMessage').value);window.open(`https://wa.me/${phone}?text=${text}`,'_blank','noopener,noreferrer')}
+function toast(t){const x=document.createElement('div');x.className='toast';x.textContent=t;document.body.appendChild(x);setTimeout(()=>x.remove(),2200)}
+async function saveSettings(){try{const d=await api('/settings',{method:'PUT',body:JSON.stringify({defaultProfit:+$('defaultProfit').value||15})});$('profit').value=d.defaultProfit;toast('Configurações salvas')}catch(e){alert(e.message)}}
+async function loadSettings(){try{const d=await api('/settings');$('defaultProfit').value=d.defaultProfit;$('profit').value=d.defaultProfit}catch{}}
+async function clearDB(){if(confirm('Isso apagará clientes, orçamentos e pedidos da sua conta. Continuar?')){await api('/reset',{method:'POST'});await refresh();toast('Dados apagados')}}
+function getTheme(){return localStorage.getItem('fp_theme')||'dark'}
+function setTheme(theme){localStorage.setItem('fp_theme',theme);document.body.classList.toggle('light',theme==='light');const b=$('themeToggle');if(b)b.textContent=theme==='light'?'☀':'☾';const s=$('darkModeSwitch');if(s)s.checked=theme!=='light'}
+function toggleTheme(){setTheme(getTheme()==='light'?'dark':'light')}
+function setMotion(on){document.body.classList.toggle('no-motion',!on);localStorage.setItem('fp_motion',on?'1':'0')}
+function syncSettingsUI(){setTheme(getTheme());setMotion(localStorage.getItem('fp_motion')!=='0');if(currentUser){$('settingsUserName').textContent=currentUser.name;$('settingsUserEmail').textContent=currentUser.email;$('settingsRole').textContent=currentUser.role}const p=JSON.parse(localStorage.getItem('fp_prefs')||'{}');if(p.fx)$('defaultFx').value=p.fx;if(p.importTax!=null)$('defaultImportTax').value=p.importTax;if(p.icms!=null)$('defaultIcms').value=p.icms}
+function saveAdvancedSettings(){const p={fx:+$('defaultFx').value||0.72,importTax:+$('defaultImportTax').value||0,icms:+$('defaultIcms').value||0};localStorage.setItem('fp_prefs',JSON.stringify(p));saveSettings();$('fx').value=p.fx;$('importTax').value=p.importTax;$('icms').value=p.icms;toast('Preferências salvas')}
+function exportLocalSettings(){const data={theme:getTheme(),motion:localStorage.getItem('fp_motion')!=='0',preferences:JSON.parse(localStorage.getItem('fp_prefs')||'{}')};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='forwardpro-preferencias.json';a.click();URL.revokeObjectURL(a.href);toast('Preferências exportadas')}
+function renderReports(){const revenue=orderCache.reduce((s,o)=>s+Number(o.totalNumeric||o.total||0),0);const done=orderCache.filter(o=>o.status==='Finalizado').length;const conv=quoteCache.length?Math.round(orderCache.length/quoteCache.length*100):0;$('rRevenue').textContent=money(revenue);$('rTicket').textContent=money(orderCache.length?revenue/orderCache.length:0);$('rDone').textContent=done;$('rConversion').textContent=conv+'%';const counts={};orderCache.forEach(o=>counts[o.status]=(counts[o.status]||0)+1);$('reportStatuses').innerHTML=Object.entries(counts).map(([k,v])=>`<div class="step"><b>${v}</b><div><span>${esc(k)}</span><small>pedido(s)</small></div></div>`).join('')||'<span class="muted">Nenhum pedido.</span>';const clients={};orderCache.forEach(o=>clients[o.clientName||'Sem cliente']=(clients[o.clientName||'Sem cliente']||0)+1);$('reportClients').innerHTML=Object.entries(clients).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k,v])=>`<div class="step"><b>${v}</b><div><span>${esc(k)}</span><small>pedido(s)</small></div></div>`).join('')||'<span class="muted">Nenhum pedido.</span>'}
+function renderActivity(){const items=[...quoteCache.map(q=>({date:q.created,text:`Orçamento ${q.code||q.id} criada`,sub:q.clientName||'Sem cliente'})),...orderCache.map(o=>({date:o.created,text:`Pedido ${o.code||o.id} · ${o.status}`,sub:o.clientName||'Sem cliente'})),...clientCache.map(c=>({date:c.created,text:`Cliente ${c.name} cadastrado`,sub:c.email||c.phone||''}))].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,20);$('activityList').innerHTML=items.map(x=>`<div class="step"><b>•</b><div><span>${esc(x.text)}</span><small>${esc(x.sub)} · ${new Date(x.date).toLocaleString('pt-BR')}</small></div></div>`).join('')||'<span class="muted">Nenhuma atividade.</span>'}
+function focusLogin(){$('authEmail')?.focus();$('landingLoginCard')?.scrollIntoView({behavior:'smooth',block:'center'})}
+
+['fx','profit','service','importTax','icms'].forEach(id=>$(id).addEventListener('input',calc));['fsearch','fsort','fcat'].forEach(id=>$(id).addEventListener('input',renderFreights));$('quoteSearch').addEventListener('input',renderQuotes);
+setTheme(getTheme());setMotion(localStorage.getItem('fp_motion')!=='0');document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='j'){e.preventDefault();toggleTheme()}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();go('calculator')}});(async()=>{renderProducts();renderExtras();calc();await bootAuth()})().catch(e=>console.error(e));
+
+    </script>
+</body>
+
+</html>
