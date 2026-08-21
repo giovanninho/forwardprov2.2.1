@@ -9,6 +9,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+# teste
+
 dotenv.config();
 const { Pool } = pg;
 const app = express();
