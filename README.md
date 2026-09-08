@@ -98,3 +98,7 @@ O ForwardPro não depende de token, cookie, device-id ou sessão de terceiros. N
 - Conversão de cotação em pedido.
 - Geração de PDF com resumo, produtos, frete, taxas, adicionais, margem e preço final.
 - PostgreSQL persistente e autenticação.
+
+
+## ForwardPro v3 - Motor automatico de calculo
+O calculo do orcamento agora e recalculado em tempo real a partir dos produtos, peso, tabela de fretes e regras salvas em Configuracoes. Inclui selecao automatica de frete, seguro percentual, impostos configuraveis, taxa operacional, markup/margem e arredondamento.
