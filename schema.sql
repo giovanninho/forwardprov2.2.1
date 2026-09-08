@@ -81,6 +81,14 @@ CREATE INDEX IF NOT EXISTS order_history_order_idx ON order_history(order_id, cr
 CREATE TABLE IF NOT EXISTS user_settings (
  user_id UUID PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
  default_profit NUMERIC(8,3) NOT NULL DEFAULT 15,
+ default_fx NUMERIC(12,6) NOT NULL DEFAULT 0.72,
+ default_service NUMERIC(8,3) NOT NULL DEFAULT 0,
+ default_import_tax NUMERIC(8,3) NOT NULL DEFAULT 0,
+ default_icms NUMERIC(8,3) NOT NULL DEFAULT 0,
+ pricing_mode TEXT NOT NULL DEFAULT 'markup',
+ freight_mode TEXT NOT NULL DEFAULT 'cheapest',
+ auto_insurance BOOLEAN NOT NULL DEFAULT true,
+ round_mode TEXT NOT NULL DEFAULT 'none',
  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 

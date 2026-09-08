@@ -630,13 +630,16 @@ app.get('/api/dashboard', auth, async (req, res) => {
 });
 
 app.get('/api/settings', auth, async (req,res)=>{
-  const r=await pool.query('SELECT default_profit AS "defaultProfit" FROM user_settings WHERE user_id=$1',[req.user.id]);
-  res.json(r.rows[0]||{defaultProfit:15});
+  const r=await pool.query(`SELECT default_profit AS "defaultProfit",default_fx AS "defaultFx",default_service AS "defaultService",default_import_tax AS "defaultImportTax",default_icms AS "defaultIcms",pricing_mode AS "pricingMode",freight_mode AS "freightMode",auto_insurance AS "autoInsurance",round_mode AS "roundMode" FROM user_settings WHERE user_id=$1`,[req.user.id]);
+  res.json(r.rows[0]||{defaultProfit:15,defaultFx:.72,defaultService:0,defaultImportTax:0,defaultIcms:0,pricingMode:'markup',freightMode:'cheapest',autoInsurance:true,roundMode:'none'});
 });
 app.put('/api/settings', auth, async (req,res)=>{
-  const profit=Number(req.body.defaultProfit);
-  if(!Number.isFinite(profit)||profit<0||profit>500)return res.status(400).json({error:'Margem inválida.'});
-  const r=await pool.query(`INSERT INTO user_settings(user_id,default_profit,updated_at) VALUES($1,$2,NOW()) ON CONFLICT(user_id) DO UPDATE SET default_profit=EXCLUDED.default_profit,updated_at=NOW() RETURNING default_profit AS "defaultProfit"`,[req.user.id,profit]);
+  const x=req.body||{};const nums={profit:Number(x.defaultProfit),fx:Number(x.defaultFx),service:Number(x.defaultService),tax:Number(x.defaultImportTax),icms:Number(x.defaultIcms)};
+  if(!Number.isFinite(nums.profit)||nums.profit<0||nums.profit>500)return res.status(400).json({error:'Margem inválida.'});
+  if(!Number.isFinite(nums.fx)||nums.fx<=0||nums.fx>100)return res.status(400).json({error:'Câmbio inválido.'});
+  for(const [k,v] of [['Taxa operacional',nums.service],['Imposto',nums.tax],['ICMS',nums.icms]])if(!Number.isFinite(v)||v<0||v>100)return res.status(400).json({error:k+' inválido.'});
+  const pricing=['markup','margin'].includes(x.pricingMode)?x.pricingMode:'markup';const freight=['cheapest','favorite','fastest'].includes(x.freightMode)?x.freightMode:'cheapest';const round=['none','1','5','10'].includes(String(x.roundMode))?String(x.roundMode):'none';
+  const r=await pool.query(`INSERT INTO user_settings(user_id,default_profit,default_fx,default_service,default_import_tax,default_icms,pricing_mode,freight_mode,auto_insurance,round_mode,updated_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,NOW()) ON CONFLICT(user_id) DO UPDATE SET default_profit=EXCLUDED.default_profit,default_fx=EXCLUDED.default_fx,default_service=EXCLUDED.default_service,default_import_tax=EXCLUDED.default_import_tax,default_icms=EXCLUDED.default_icms,pricing_mode=EXCLUDED.pricing_mode,freight_mode=EXCLUDED.freight_mode,auto_insurance=EXCLUDED.auto_insurance,round_mode=EXCLUDED.round_mode,updated_at=NOW() RETURNING default_profit AS "defaultProfit",default_fx AS "defaultFx",default_service AS "defaultService",default_import_tax AS "defaultImportTax",default_icms AS "defaultIcms",pricing_mode AS "pricingMode",freight_mode AS "freightMode",auto_insurance AS "autoInsurance",round_mode AS "roundMode"`,[req.user.id,nums.profit,nums.fx,nums.service,nums.tax,nums.icms,pricing,freight,x.autoInsurance!==false,round]);
   res.json(r.rows[0]);
 });
 
