@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link rel="icon" type="image/png" href="/favicon.png">
-    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,21 +8,7 @@
     <style>
         :root{--bg:#070b14;--panel:#101829;--panel2:#141e33;--line:#26324a;--text:#f5f7ff;--muted:#8e9bb8;--p:#6c7cff;--p2:#8b5cf6;--green:#35d49a;--orange:#f6b94c;--red:#ff6b7a;--shadow:0 22px 70px #0006}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 5% 0%,#6c7cff22,transparent 28%),radial-gradient(circle at 95% 0%,#8b5cf61c,transparent 25%),linear-gradient(145deg,#060912,#0b1120 55%,#090d18);color:var(--text);font:14px Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}button,input,select{font:inherit}.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}.side{position:sticky;top:0;height:100vh;padding:22px 14px;background:#070b14cc;border-right:1px solid #ffffff10;backdrop-filter:blur(18px);z-index:10}.brand{font-size:25px;font-weight:900;letter-spacing:-1px;padding:4px 12px 28px}.brand span{color:var(--p)}.navlabel{color:#5d6a84;text-transform:uppercase;font-size:10px;letter-spacing:1.5px;padding:0 12px 8px}.nav{display:grid;gap:5px}.nav button{border:1px solid transparent;background:transparent;color:#99a7c2;border-radius:11px;padding:12px;text-align:left;cursor:pointer;transition:.22s}.nav button:hover{background:#6c7cff10;color:white;transform:translateX(2px)}.nav button.active{background:linear-gradient(90deg,#6c7cff22,#6c7cff05);border-color:#6c7cff25;color:white}.sidebottom{position:absolute;left:14px;right:14px;bottom:18px}.sidecard{border:1px solid #ffffff10;background:#101829aa;padding:13px;border-radius:13px;color:var(--muted);font-size:11px;line-height:1.5}.main{min-width:0}.top{height:74px;position:sticky;top:0;z-index:8;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:#070b14a8;border-bottom:1px solid #ffffff10;backdrop-filter:blur(14px)}.title{font-weight:800}.subtitle{color:var(--muted);font-size:11px;margin-top:3px}.avatar{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--p),var(--p2));font-weight:900}.page{display:none;animation:in .28s ease}.page.active{display:block}@keyframes in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}.content{max-width:1250px;margin:auto;padding:32px}.hero,.panel,.stat,.card{border:1px solid #ffffff12;background:#101829d9;border-radius:17px;box-shadow:var(--shadow)}.hero{padding:38px;position:relative;overflow:hidden;background:linear-gradient(135deg,#6c7cff18,#101829dd 55%,#8b5cf612)}.hero:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-120px;top:-150px;background:#6c7cff18}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#9ca9ff;font-weight:800}.hero h1{font-size:42px;line-height:1.05;letter-spacing:-2px;max-width:700px;margin:10px 0}.hero p{color:#a8b3cb;line-height:1.65;max-width:680px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.btn{border:1px solid #ffffff14;background:#172139;color:white;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:750;transition:.2s}.btn:hover{transform:translateY(-2px);border-color:#6c7cff55}.btn.primary{border:0;background:linear-gradient(135deg,var(--p),var(--p2));box-shadow:0 10px 25px #6c7cff22}.btn.danger{color:#ff9aa5}.sectionhead{display:flex;justify-content:space-between;align-items:end;margin:25px 0 12px}.sectionhead h2{font-size:18px;margin:0}.muted{color:var(--muted);font-size:11px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{padding:17px;transition:.2s}.stat:hover{transform:translateY(-3px)}.stat small{color:var(--muted)}.stat strong{display:block;font-size:26px;margin:8px 0}.green{color:var(--green)}.grid2{display:grid;grid-template-columns:1.3fr .7fr;gap:13px;margin-top:13px}.panel{padding:18px}.panel h3{margin:0 0 14px;font-size:14px}.steps{display:grid;gap:8px}.step{display:flex;gap:11px;padding:11px;background:#ffffff03;border-radius:10px}.step b{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:#6c7cff18;color:#aeb6ff}.step span{font-size:12px}.step small{display:block;color:#71809d;margin-top:3px}.toolbar{display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:14px}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.formgrid.three{grid-template-columns:repeat(3,1fr)}label{display:block;color:#8e9bb8;font-size:10px;margin-bottom:5px}input,select,textarea{width:100%;border:1px solid #ffffff13;background:#0b1221;color:#eaf0ff;border-radius:9px;padding:10px;outline:0}input:focus,select:focus,textarea:focus{border-color:#6c7cff77;box-shadow:0 0 0 3px #6c7cff13}.card{padding:18px;margin-bottom:13px}.card h2{font-size:15px;margin:0 0 15px}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:650px}.table th,.table td{text-align:left;padding:11px 8px;border-bottom:1px solid #ffffff0d;font-size:12px}.table th{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:#74829e}.badge{display:inline-flex;padding:5px 8px;border-radius:99px;background:#6c7cff12;color:#aeb6ff;font-size:10px}.badge.green{background:#35d49a12;color:#62e2b0}.badge.orange{background:#f6b94c12;color:#f7ce72}.empty{text-align:center;padding:36px;color:var(--muted);border:1px dashed #ffffff15;border-radius:13px}.freights{display:grid;gap:8px}.freight{padding:14px;border:1px solid #ffffff0f;border-radius:12px;background:#ffffff03;cursor:pointer;transition:.2s}.freight:hover,.freight.active{border-color:#6c7cff55;background:#6c7cff09}.freight b{display:block}.freight .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.tag{font-size:10px;color:#8996b1;background:#172139;padding:4px 7px;border-radius:99px}.total{font-size:34px;font-weight:900;letter-spacing:-1px;margin:7px 0}.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.kpi{padding:12px;background:#ffffff03;border:1px solid #ffffff0c;border-radius:10px}.kpi small{color:var(--muted)}.kpi strong{display:block;margin-top:5px}.note{color:#8491aa;font-size:11px;line-height:1.55;padding:11px;background:#ffffff03;border:1px solid #ffffff0a;border-radius:10px}.modal{position:fixed;inset:0;background:#0009;backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}.modal.open{display:flex}.modalbox{width:min(650px,100%);max-height:90vh;overflow:auto;background:#101829;border:1px solid #ffffff17;border-radius:17px;padding:20px;box-shadow:0 30px 100px #000}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.toast{position:fixed;right:20px;bottom:20px;background:#121b2d;border:1px solid #6c7cff44;border-radius:11px;padding:12px 15px;z-index:80;box-shadow:var(--shadow);animation:in .25s ease}.progress{height:7px;background:#1a243a;border-radius:99px;overflow:hidden}.progress span{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--p2))}.quote-total{font-size:32px;font-weight:900}.hide{display:none!important}@media(max-width:900px){.app{grid-template-columns:72px 1fr}.brand{font-size:0;text-align:center}.brand:after{content:"FP";font-size:19px}.nav button{font-size:0;text-align:center}.nav button:first-letter{font-size:17px}.navlabel,.sidebottom{display:none}.content{padding:20px}.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.top{padding:0 20px}.hero h1{font-size:32px}}@media(max-width:600px){.stats{grid-template-columns:1fr}.formgrid,.formgrid.three{grid-template-columns:1fr}.hero{padding:25px}}
         
-        
-        .product-modal{width:min(720px,100%)}
-        .product-upload-grid{display:grid;grid-template-columns:190px 1fr;gap:18px;align-items:start}
-        .product-image-upload{position:relative;display:flex;align-items:center;justify-content:center;width:190px;height:190px;border:1px dashed #6c7cff55;background:linear-gradient(145deg,#6c7cff0b,#ffffff03);border-radius:15px;overflow:hidden;cursor:pointer;transition:.2s}
-        .product-image-upload:hover{border-color:#8b5cf6aa;background:#6c7cff10}
-        .product-image-upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-        .product-image-empty{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;color:#aeb6ff;padding:15px}
-        .product-image-empty span{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:#6c7cff18;font-size:24px}
-        .product-image-empty small{color:var(--muted);font-size:10px}
-        .product-image-preview{width:100%;height:100%;object-fit:cover;display:block}
-        .product-thumb{width:42px;height:42px;border-radius:9px;object-fit:cover;border:1px solid #ffffff16;background:#0b1221;vertical-align:middle;margin-right:9px}
-        .product-no-image{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:9px;background:#6c7cff12;color:#aeb6ff;margin-right:9px;vertical-align:middle}
-        .product-name-cell{display:flex;align-items:center;min-width:190px}
-        @media(max-width:600px){.product-upload-grid{grid-template-columns:1fr}.product-image-upload{width:100%;height:220px}}
-.auth-locked .app{display:none!important}.auth-screen{min-height:100vh;display:none;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at 15% 5%,#6c7cff25,transparent 30%),radial-gradient(circle at 90% 10%,#8b5cf620,transparent 25%),#070b14}.auth-locked .auth-screen{display:flex}.auth-card{width:min(430px,100%);padding:30px;border:1px solid #ffffff14;background:#101829e8;border-radius:20px;box-shadow:0 30px 100px #0008}.auth-brand{font-size:29px;font-weight:900;letter-spacing:-1px;margin-bottom:7px}.auth-brand span{color:var(--p)}.auth-title{font-size:22px;margin:22px 0 6px}.auth-sub{color:var(--muted);font-size:12px;line-height:1.55;margin-bottom:20px}.auth-form{display:grid;gap:12px}.auth-switch{text-align:center;color:var(--muted);font-size:11px;margin-top:16px}.auth-switch button{border:0;background:none;color:#9ca9ff;cursor:pointer}.userbox{display:flex;align-items:center;gap:9px}.usertext{text-align:right}.usertext b{font-size:12px}.usertext small{display:block;color:var(--muted);font-size:10px}.logout-btn{margin-left:6px}
+        .auth-locked .app{display:none!important}.auth-screen{min-height:100vh;display:none;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at 15% 5%,#6c7cff25,transparent 30%),radial-gradient(circle at 90% 10%,#8b5cf620,transparent 25%),#070b14}.auth-locked .auth-screen{display:flex}.auth-card{width:min(430px,100%);padding:30px;border:1px solid #ffffff14;background:#101829e8;border-radius:20px;box-shadow:0 30px 100px #0008}.auth-brand{font-size:29px;font-weight:900;letter-spacing:-1px;margin-bottom:7px}.auth-brand span{color:var(--p)}.auth-title{font-size:22px;margin:22px 0 6px}.auth-sub{color:var(--muted);font-size:12px;line-height:1.55;margin-bottom:20px}.auth-form{display:grid;gap:12px}.auth-switch{text-align:center;color:var(--muted);font-size:11px;margin-top:16px}.auth-switch button{border:0;background:none;color:#9ca9ff;cursor:pointer}.userbox{display:flex;align-items:center;gap:9px}.usertext{text-align:right}.usertext b{font-size:12px}.usertext small{display:block;color:var(--muted);font-size:10px}.logout-btn{margin-left:6px}
     
 :root{--accent:#6c7cff;--accent2:#8b5cf6;--radius:18px}
 body.light{--bg:#f4f7fb;--panel:#ffffff;--panel2:#f7f9fc;--line:#dfe5ef;--text:#182033;--muted:#667085;--p:#5865f2;--p2:#7c3aed;--green:#159f72;--orange:#c47d08;--red:#d64557;background:radial-gradient(circle at 5% 0%,#6c7cff18,transparent 28%),linear-gradient(145deg,#f8faff,#eef2f8)}
@@ -88,6 +72,9 @@ body.light .side{background:#ffffffdd;border-right-color:#dfe5ef}body.light .top
 @media(max-width:780px){.auth-locked{overflow:auto}.auth-screen{position:absolute;min-height:100%;overflow:visible}.auth-screen .auth-wrap{width:100%;min-height:100dvh;padding:24px 16px 28px;display:flex;flex-direction:column;align-items:stretch;gap:30px}.auth-screen .auth-brand{position:static}.auth-screen .auth-copy{padding-top:22px}.auth-screen .auth-copy h1{font-size:clamp(39px,11vw,54px);letter-spacing:-2.6px}.auth-screen .auth-copy>p{font-size:13px;line-height:1.65}.auth-screen .auth-actions{margin-top:20px}.auth-screen .auth-benefits{display:none}.auth-screen .auth-card{padding:22px 18px;border-radius:20px}.auth-screen .auth-card-top{margin-bottom:19px}.auth-screen .auth-foot{position:static;text-align:center;margin-top:auto}.auth-screen .auth-input{font-size:16px}}
 @media(max-width:420px){.auth-screen .auth-wrap{padding-left:12px;padding-right:12px}.auth-screen .auth-copy h1{font-size:37px}.auth-screen .auth-actions{display:grid}.auth-screen .auth-action{width:100%}.auth-screen .auth-card{padding:20px 15px}}
 @media(prefers-reduced-motion:reduce){.auth-screen *,.auth-screen *:before,.auth-screen *:after{animation:none!important;transition:none!important}}
+
+/* ===== ForwardPro v3 — Motor automático ===== */
+.auto-pill,.live-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:#35d49a12;color:#62e2b0;border:1px solid #35d49a25;font-size:9px;font-weight:850;letter-spacing:.7px}.auto-pill i,.live-badge i{width:6px;height:6px;border-radius:50%;background:#35d49a;box-shadow:0 0 12px #35d49aaa}.auto-banner{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:16px 18px;margin-bottom:14px;border:1px solid #6c7cff25;border-radius:16px;background:linear-gradient(110deg,#6c7cff12,#101829cc 55%,#35d49a08)}.auto-banner-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--p),var(--p2));font-size:18px}.auto-banner b{display:block;font-size:13px}.auto-banner span{display:block;color:var(--muted);font-size:10px;margin-top:4px;line-height:1.45}.card-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.card-title-row>div{display:flex;align-items:center;gap:9px}.card-title-row h2{margin:0!important}.step-number{width:26px;height:26px;border-radius:8px;background:#6c7cff14;color:#aeb6ff;display:grid;place-items:center;font-size:9px;font-weight:900}.auto-freight-empty,.auto-freight-selected{padding:18px;border-radius:14px;border:1px solid #ffffff0e;background:#ffffff03}.auto-freight-empty b,.auto-freight-selected b{display:block}.auto-freight-empty span{display:block;margin-top:5px;color:var(--muted);font-size:10px}.auto-freight-selected{display:grid;grid-template-columns:1fr auto;gap:10px;border-color:#35d49a24;background:linear-gradient(120deg,#35d49a09,#ffffff02)}.auto-freight-selected .price{text-align:right;font-size:22px;font-weight:900}.auto-freight-selected .meta{color:var(--muted);font-size:10px;margin-top:6px}.auto-details{margin-top:10px}.auto-details summary,.quote-overrides summary{cursor:pointer;color:#9ca9ff;font-size:10px;font-weight:800}.auto-result-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:13px;margin-top:13px}.calc-breakdown{margin:0}.break-row{display:flex;justify-content:space-between;gap:18px;padding:9px 0;border-bottom:1px solid #ffffff08;color:#8e9bb8;font-size:11px}.break-row b{color:#f5f7ff}.break-row small{color:#65728b}.break-row.subtotal{margin-top:4px;padding-top:13px;color:#b7c1d6;font-weight:700}.break-row.profit{border:0;color:#62e2b0}.break-row.profit b{color:#62e2b0}.final-card{border:1px solid #6c7cff30;border-radius:18px;padding:23px;background:linear-gradient(145deg,#6c7cff18,#101829 54%,#8b5cf613);box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center}.final-kicker{font-size:9px;letter-spacing:1.7px;color:#9ca9ff;font-weight:900}.final-value{font-size:42px;font-weight:950;letter-spacing:-2px;margin:8px 0}.final-meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:10px}.rule-summary{margin-top:16px;padding:10px;border:1px solid #ffffff0b;border-radius:10px;background:#ffffff03;color:#7f8da8;font-size:9px;line-height:1.55}.final-actions{margin-top:15px}.quote-overrides{margin-top:13px}.quote-overrides[open] summary{margin-bottom:12px}.calc-flash{animation:calcFlash .32s ease}@keyframes calcFlash{0%{opacity:.45}100%{opacity:1}}@media(max-width:800px){.auto-result-grid{grid-template-columns:1fr}.auto-banner{grid-template-columns:auto 1fr}.auto-banner .btn{grid-column:1/-1}.final-value{font-size:36px}}@media(max-width:600px){.auto-pill{display:none}.auto-freight-selected{grid-template-columns:1fr}.auto-freight-selected .price{text-align:left}.final-meta{flex-direction:column}.auto-banner{padding:13px}.final-card{padding:18px}}
 </style>
 </head>
 
@@ -246,134 +233,75 @@ body.light .side{background:#ffffffdd;border-right-color:#dfe5ef}body.light .top
                 </div>
             </section>
             <section id="page-calculator" class="page">
-                <div class="content">
-                    <div class="sectionhead">
-                        <h2>Novo Orçamento</h2><span class="muted">Calcule e salve</span></div>
-                    <div class="card">
-                        <h2>1. Cliente e parâmetros</h2>
-                        <div class="formgrid three">
-                            <div>
-                                <label>Cliente</label>
-                                <select id="qClient">
-                                    <option value="">Cliente não informado</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Câmbio CNY → BRL</label>
-                                <input id="fx" type="number" step="0.0001" value="0.72">
-                            </div>
-                            <div>
-                                <label>Margem de lucro (%)</label>
-                                <input id="profit" type="number" step="0.1" value="15">
-                            </div>
-                        </div>
-                        <div class="formgrid three" style="margin-top:11px">
-                            <div>
-                                <label>Taxa operacional (%)</label>
-                                <input id="service" type="number" step="0.1" value="0">
-                            </div>
-                            <div>
-                                <label>Imposto de importação (%)</label>
-                                <input id="importTax" type="number" step="0.1" value="0">
-                            </div>
-                            <div>
-                                <label>ICMS / adicional (%)</label>
-                                <input id="icms" type="number" step="0.1" value="0">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="sectionhead" style="margin:0 0 12px">
-                            <div><h2 style="margin:0">2. Produtos</h2><span class="muted">Adicione cada produto por um formulário rápido.</span></div>
-                            <button class="btn primary" onclick="openProductModal()">＋ Adicionar produto</button>
-                        </div>
-                        <div class="tablewrap" style="margin-top:14px">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Produto</th>
-                                        <th>Qtd.</th>
-                                        <th>Valor</th>
-                                        <th>Peso</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="products"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <h2>3. Adicionais do pacote</h2>
-                        <div class="formgrid three">
-                            <div><label>Descrição</label><input id="extraDesc" placeholder="Ex.: embalagem reforçada"></div>
-                            <div><label>Valor (R$)</label><input id="extraValue" type="number" step="0.01" value="0"></div>
-                            <div style="display:flex;align-items:end"><button class="btn primary" style="width:100%" onclick="addExtra()">＋ Adicionar adicional</button></div>
-                        </div>
-                        <div id="extrasList" class="freights" style="margin-top:12px"></div>
-                        <div class="formgrid" style="margin-top:12px"><div style="grid-column:1/-1"><label>Observações do Orçamento</label><textarea id="qNotes" rows="3" placeholder="Informações para o cliente ou para sua operação"></textarea></div></div>
-                    </div>
-                    <div class="card">
-                        <h2>4. Frete</h2>
-                        <div class="formgrid three">
-                            <div>
-                                <label>Pesquisar linha</label>
-                                <input id="fsearch" placeholder="EUB, FJ...">
-                            </div>
-                            <div>
-                                <label>Ordenar</label>
-                                <select id="fsort">
-                                    <option value="price">Menor preço</option>
-                                    <option value="time">Menor prazo</option>
-                                    <option value="name">Nome</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Categoria</label>
-                                <select id="fcat">
-                                    <option value="ordinary">Mercadoria comum</option>
-                                    <option value="electric">Eletrônico</option>
-                                    <option value="liquid">Líquido</option>
-                                    <option value="battery">Bateria</option>
-                                    <option value="shoes">Calçados</option>
-                                    <option value="cosmetics">Cosméticos</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="actions" style="margin-top:13px;align-items:center">
-                            <button class="btn primary" onclick="loadLocalFreights()">↻ Calcular fretes cadastrados</button>
-                            <span id="cssbuyStatus" class="muted">Os fretes são gerenciados por você. Nenhuma conta CSSBuy é necessária.</span>
-                        </div>
-                        <div id="freightList" class="freights" style="margin-top:13px"></div>
-                        <div id="freightDetails" class="note hide" style="margin-top:10px"></div>
-                    </div>
-                    <div class="grid2">
-                        <div class="card">
-                            <h2>Resumo da cobrança</h2>
-                            <div class="kpis">
-                                <div class="kpi"><small>Produtos</small><strong id="rProducts">R$ 0,00</strong></div>
-                                <div class="kpi"><small>Frete</small><strong id="rFreight">R$ 0,00</strong></div>
-                                <div class="kpi"><small>Impostos</small><strong id="rTax">R$ 0,00</strong></div>
-                                <div class="kpi"><small>Peso</small><strong id="rWeight">0 g</strong></div>
-                            </div>
-                            <div style="margin-top:16px">
-                                <div class="muted">Preço final para o cliente</div>
-                                <div class="quote-total" id="rFinal">R$ 0,00</div>
-                                <div class="muted" id="rProfit">Lucro estimado: R$ 0,00</div>
-                            </div>
-                            <div class="actions">
-                                <button class="btn primary" onclick="saveQuote()">Salvar Orçamento</button>
-                                <button class="btn" onclick="copyQuote()">Copiar orçamento</button>
-                                <button class="btn" onclick="newQuote()">Limpar</button>
-                            </div>
-                        </div>
-                        <div class="panel">
-                            <h3>Como funciona</h3>
-                            <div class="note">O Orçamento é salva no PostgreSQL. Depois, em Orçamentos, você pode visualizar os detalhes ou transformá-la em um pedido.</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="page-quotes" class="page">
+<div class="content">
+  <div class="sectionhead"><div><h2>Novo Orçamento</h2><span class="muted">O ForwardPro calcula tudo em tempo real</span></div><span class="auto-pill"><i></i> MOTOR AUTOMÁTICO ATIVO</span></div>
+
+  <div class="auto-banner">
+    <div class="auto-banner-icon">✦</div>
+    <div><b>Você informa os produtos. O ForwardPro faz o resto.</b><span>Peso, frete, seguro, câmbio, impostos, taxa operacional, margem e preço final são recalculados automaticamente a cada alteração.</span></div>
+    <button class="btn" onclick="go('settings')">Regras do cálculo</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title-row"><div><span class="step-number">01</span><h2>Cliente</h2></div><span class="muted">Opcional</span></div>
+    <div class="formgrid"><div><label>Cliente do orçamento</label><select id="qClient"><option value="">Cliente não informado</option></select></div><div><label>Observação rápida</label><input id="qNotes" placeholder="Ex.: cliente prefere frete econômico"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title-row"><div><span class="step-number">02</span><h2>Produtos</h2></div><span id="autoWeightBadge" class="badge">0,00 g</span></div>
+    <div class="formgrid three">
+      <div><label>Produto</label><input id="pname" placeholder="Ex.: Tênis"></div>
+      <div><label>Preço unitário (CNY)</label><input id="pprice" type="number" step="0.01" value="0"></div>
+      <div><label>Quantidade</label><input id="pqty" type="number" min="1" value="1"></div>
+    </div>
+    <div class="formgrid three" style="margin-top:11px">
+      <div><label>Peso unitário (g)</label><input id="pweight" type="number" min="0" step="0.01" value="0"></div>
+      <div><label>Dimensões (cm), opcional</label><input id="pdims" placeholder="30x20x10"></div>
+      <div style="display:flex;align-items:end"><button class="btn primary" style="width:100%" onclick="addProduct()">＋ Adicionar produto</button></div>
+    </div>
+    <div class="tablewrap" style="margin-top:14px"><table class="table"><thead><tr><th>Produto</th><th>Qtd.</th><th>Unitário</th><th>Total</th><th>Peso</th><th></th></tr></thead><tbody id="products"></tbody></table></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title-row"><div><span class="step-number">03</span><h2>Frete automático</h2></div><span id="autoFreightBadge" class="badge green">Aguardando produtos</span></div>
+    <div id="autoFreightHero" class="auto-freight-empty"><b>Nenhum frete calculado</b><span>Adicione ao menos um produto com peso para o ForwardPro escolher automaticamente a melhor linha disponível.</span></div>
+    <details class="auto-details"><summary>Ver outras opções de frete</summary><div id="freightList" class="freights" style="margin-top:12px"></div></details>
+    <div id="freightDetails" class="note hide" style="margin-top:10px"></div>
+    <input id="fsearch" class="hide"><select id="fsort" class="hide"><option value="price">price</option></select><select id="fcat" class="hide"><option value="ordinary">ordinary</option></select><span id="cssbuyStatus" class="hide"></span>
+  </div>
+
+  <div class="card">
+    <div class="card-title-row"><div><span class="step-number">04</span><h2>Adicionais</h2></div><span class="muted">Opcional</span></div>
+    <div class="formgrid three"><div><label>Descrição</label><input id="extraDesc" placeholder="Ex.: embalagem reforçada"></div><div><label>Valor (R$)</label><input id="extraValue" type="number" step="0.01" value="0"></div><div style="display:flex;align-items:end"><button class="btn" style="width:100%" onclick="addExtra()">＋ Adicionar</button></div></div>
+    <div id="extrasList" class="freights" style="margin-top:12px"></div>
+  </div>
+
+  <div class="auto-result-grid">
+    <div class="card calc-breakdown">
+      <div class="card-title-row"><div><span class="step-number">05</span><h2>Composição automática</h2></div><span id="calcState" class="live-badge"><i></i> AO VIVO</span></div>
+      <div class="break-row"><span>Produtos</span><b id="rProducts">R$ 0,00</b></div>
+      <div class="break-row"><span>Frete</span><b id="rFreight">R$ 0,00</b></div>
+      <div class="break-row"><span>Seguro <small id="rInsuranceRate"></small></span><b id="rInsurance">R$ 0,00</b></div>
+      <div class="break-row"><span>Adicionais</span><b id="rExtras">R$ 0,00</b></div>
+      <div class="break-row"><span>Imposto de importação</span><b id="rImportTax">R$ 0,00</b></div>
+      <div class="break-row"><span>ICMS / adicional</span><b id="rIcms">R$ 0,00</b></div>
+      <div class="break-row"><span>Taxa operacional</span><b id="rService">R$ 0,00</b></div>
+      <div class="break-row subtotal"><span>Custo total da operação</span><b id="rCost">R$ 0,00</b></div>
+      <div class="break-row profit"><span>Lucro projetado</span><b id="rProfitValue">R$ 0,00</b></div>
+    </div>
+    <div class="final-card">
+      <span class="final-kicker">VALOR PARA O CLIENTE</span>
+      <div class="final-value" id="rFinal">R$ 0,00</div>
+      <div class="final-meta"><span id="rWeight">0,00 g</span><span id="rProfit">Lucro: R$ 0,00</span></div>
+      <div id="ruleSummary" class="rule-summary">Carregando regras automáticas...</div>
+      <div class="actions final-actions"><button class="btn primary" onclick="saveQuote()">Salvar orçamento</button><button class="btn" onclick="copyQuote()">Copiar resumo</button><button class="btn" onclick="newQuote()">Limpar</button></div>
+    </div>
+  </div>
+
+  <details class="card quote-overrides"><summary>Ajustes excepcionais desta cotação</summary><p class="muted">Use apenas quando quiser substituir temporariamente as regras padrão salvas em Configurações.</p><div class="formgrid three"><div><label>Câmbio CNY → BRL</label><input id="fx" type="number" step="0.0001" value="0.72"></div><div><label>Margem / markup (%)</label><input id="profit" type="number" step="0.1" value="15"></div><div><label>Taxa operacional (%)</label><input id="service" type="number" step="0.1" value="0"></div><div><label>Imposto de importação (%)</label><input id="importTax" type="number" step="0.1" value="0"></div><div><label>ICMS (%)</label><input id="icms" type="number" step="0.1" value="0"></div><div><label>Seguro</label><select id="quoteInsurance"><option value="auto">Automático</option><option value="on">Sempre incluir</option><option value="off">Não incluir</option></select></div></div></details>
+</div>
+</section>
+<section id="page-quotes" class="page">
                 <div class="content">
                     <div class="sectionhead">
                         <h2>Orçamentos</h2><span class="muted">Histórico completo</span></div>
@@ -437,60 +365,17 @@ body.light .side{background:#ffffffdd;border-right-color:#dfe5ef}body.light .top
             </section>
             <section id="page-reports" class="page"><div class="content"><div class="sectionhead"><h2>Relatórios</h2><span class="muted">Visão financeira da sua operação</span></div><div class="stats"><div class="stat"><small>Faturamento</small><strong id="rRevenue">R$ 0,00</strong><span class="muted">pedidos registrados</span></div><div class="stat"><small>Ticket médio</small><strong id="rTicket">R$ 0,00</strong><span class="muted">por pedido</span></div><div class="stat"><small>Pedidos concluídos</small><strong id="rDone">0</strong><span class="muted">finalizados</span></div><div class="stat"><small>Conversão</small><strong id="rConversion">0%</strong><span class="muted">Orçamentos → pedidos</span></div></div><div class="grid2"><div class="panel"><h3>Resumo de status</h3><div id="reportStatuses" class="steps"></div></div><div class="panel"><h3>Clientes com mais pedidos</h3><div id="reportClients" class="steps"></div></div></div></div></section>
 <section id="page-activity" class="page"><div class="content"><div class="sectionhead"><h2>Central de atividades</h2><span class="muted">Últimas movimentações</span></div><div class="panel"><div id="activityList" class="steps"></div></div></div></section>
-<section id="page-settings" class="page"><div class="content"><div class="sectionhead"><h2>Configurações</h2><span class="muted">Personalize o ForwardPro</span></div><div class="grid2"><div><div class="setting-group"><h3>Aparência</h3><div class="setting-row"><div><b>Modo escuro</b><small>Use a interface escura ou clara.</small></div><label class="switch"><input id="darkModeSwitch" type="checkbox" checked onchange="setTheme(this.checked?'dark':'light')"><span class="slider"></span></label></div><div class="setting-row"><div><b>Animações</b><small>Transições suaves entre telas e cartões.</small></div><label class="switch"><input id="motionSwitch" type="checkbox" checked onchange="setMotion(this.checked)"><span class="slider"></span></label></div></div><div class="setting-group"><h3>Calculadora</h3><div class="formgrid"><div><label>Margem padrão (%)</label><input id="defaultProfit" type="number" value="15" step="0.1"></div><div><label>Câmbio padrão CNY → BRL</label><input id="defaultFx" type="number" value="0.72" step="0.0001"></div><div><label>Imposto de importação padrão (%)</label><input id="defaultImportTax" type="number" value="0" step="0.1"></div><div><label>ICMS padrão (%)</label><input id="defaultIcms" type="number" value="0" step="0.1"></div></div><div class="actions"><button class="btn primary" onclick="saveAdvancedSettings()">Salvar preferências</button></div></div></div><div><div class="setting-group"><h3>Perfil</h3><div class="note"><b id="settingsUserName">Usuário</b><br><span id="settingsUserEmail">—</span><br><span class="muted">Perfil: <span id="settingsRole">—</span></span></div></div><div class="setting-group"><h3>Dados</h3><p class="muted">Os dados ficam armazenados no PostgreSQL do servidor e isolados por usuário autenticado.</p><div class="actions"><button class="btn" onclick="exportLocalSettings()">Exportar preferências</button><button class="btn danger" onclick="clearDB()">Apagar meus dados</button></div></div><div class="setting-group"><h3>Atalhos</h3><div class="setting-row"><div><b>Novo Orçamento</b><small>Ctrl + K</small></div><span class="tag">Ctrl K</span></div><div class="setting-row"><div><b>Alternar tema</b><small>Ctrl + J</small></div><span class="tag">Ctrl J</span></div></div></div></div></div></section>
+<section id="page-settings" class="page"><div class="content"><div class="sectionhead"><h2>Configurações</h2><span class="muted">Personalize o ForwardPro</span></div><div class="grid2"><div><div class="setting-group"><h3>Aparência</h3><div class="setting-row"><div><b>Modo escuro</b><small>Use a interface escura ou clara.</small></div><label class="switch"><input id="darkModeSwitch" type="checkbox" checked onchange="setTheme(this.checked?'dark':'light')"><span class="slider"></span></label></div><div class="setting-row"><div><b>Animações</b><small>Transições suaves entre telas e cartões.</small></div><label class="switch"><input id="motionSwitch" type="checkbox" checked onchange="setMotion(this.checked)"><span class="slider"></span></label></div></div><div class="setting-group"><h3>Motor automático de cálculo</h3><p class="muted">Configure uma vez. Todos os novos orçamentos passam a usar estas regras automaticamente.</p><div class="formgrid">
+<div><label>Câmbio CNY → BRL</label><input id="defaultFx" type="number" value="0.72" step="0.0001"></div>
+<div><label>Margem / lucro padrão (%)</label><input id="defaultProfit" type="number" value="15" step="0.1"></div>
+<div><label>Modelo de lucro</label><select id="defaultPricingMode"><option value="markup">Markup sobre custo</option><option value="margin">Margem líquida desejada</option></select></div>
+<div><label>Taxa operacional (%)</label><input id="defaultService" type="number" value="0" step="0.1"></div>
+<div><label>Imposto de importação (%)</label><input id="defaultImportTax" type="number" value="0" step="0.1"></div>
+<div><label>ICMS (%)</label><input id="defaultIcms" type="number" value="0" step="0.1"></div>
+<div><label>Seleção automática de frete</label><select id="defaultFreightMode"><option value="cheapest">Menor preço</option><option value="favorite">Favorito (se disponível)</option><option value="fastest">Menor prazo</option></select></div>
+<div><label>Arredondamento do preço final</label><select id="defaultRoundMode"><option value="none">Sem arredondar</option><option value="1">Próximo R$ 1 para cima</option><option value="5">Próximo R$ 5 para cima</option><option value="10">Próximo R$ 10 para cima</option></select></div>
+</div><div class="setting-row" style="margin-top:12px"><div><b>Seguro automático</b><small>Usa a porcentagem cadastrada no frete sobre o valor dos produtos.</small></div><label class="switch"><input id="defaultInsurance" type="checkbox" checked><span class="slider"></span></label></div><div class="actions"><button class="btn primary" onclick="saveAdvancedSettings()">Salvar regras automáticas</button></div></div></div><div><div class="setting-group"><h3>Perfil</h3><div class="note"><b id="settingsUserName">Usuário</b><br><span id="settingsUserEmail">—</span><br><span class="muted">Perfil: <span id="settingsRole">—</span></span></div></div><div class="setting-group"><h3>Dados</h3><p class="muted">Os dados ficam armazenados no PostgreSQL do servidor e isolados por usuário autenticado.</p><div class="actions"><button class="btn" onclick="exportLocalSettings()">Exportar preferências</button><button class="btn danger" onclick="clearDB()">Apagar meus dados</button></div></div><div class="setting-group"><h3>Atalhos</h3><div class="setting-row"><div><b>Novo Orçamento</b><small>Ctrl + K</small></div><span class="tag">Ctrl K</span></div><div class="setting-row"><div><b>Alternar tema</b><small>Ctrl + J</small></div><span class="tag">Ctrl J</span></div></div></div></div></div></section>
         </main>
-    </div>
-    <div id="productModal" class="modal" onclick="if(event.target===this)closeModal('productModal')">
-        <div class="modalbox product-modal">
-            <div class="modalhead">
-                <div>
-                    <h3 style="margin:0">Adicionar produto</h3>
-                    <div class="muted" style="margin-top:4px">Coloque a foto e as informações do produto.</div>
-                </div>
-                <button class="btn" onclick="closeModal('productModal')">×</button>
-            </div>
-            <div class="product-upload-grid">
-                <div>
-                    <label>Imagem do produto</label>
-                    <label class="product-image-upload" for="pimage">
-                        <input id="pimage" type="file" accept="image/png,image/jpeg,image/webp" onchange="previewProductImage(event)">
-                        <div id="productImageEmpty" class="product-image-empty">
-                            <span>＋</span>
-                            <b>Adicionar imagem</b>
-                            <small>PNG, JPG ou WEBP</small>
-                        </div>
-                        <img id="productImagePreview" class="product-image-preview hide" alt="Prévia do produto">
-                    </label>
-                    <button id="removeProductImage" class="btn hide" type="button" style="width:100%;margin-top:8px" onclick="clearProductImage()">Remover imagem</button>
-                </div>
-                <div class="formgrid">
-                    <div style="grid-column:1/-1">
-                        <label>Nome do produto</label>
-                        <input id="pname" placeholder="Ex.: Tênis Nike Air Max">
-                    </div>
-                    <div>
-                        <label>Preço unitário (CNY)</label>
-                        <input id="pprice" type="number" min="0" step="0.01" value="0">
-                    </div>
-                    <div>
-                        <label>Quantidade</label>
-                        <input id="pqty" type="number" min="1" step="1" value="1">
-                    </div>
-                    <div>
-                        <label>Peso unitário (g)</label>
-                        <input id="pweight" type="number" min="0" step="1" value="0">
-                    </div>
-                    <div>
-                        <label>Dimensões (cm)</label>
-                        <input id="pdims" placeholder="30x20x10">
-                    </div>
-                </div>
-            </div>
-            <div class="actions">
-                <button class="btn" onclick="closeModal('productModal')">Cancelar</button>
-                <button class="btn primary" onclick="addProductFromModal()">Adicionar produto</button>
-            </div>
-        </div>
     </div>
     <div id="clientModal" class="modal">
         <div class="modalbox">
@@ -522,7 +407,7 @@ body.light .side{background:#ffffffdd;border-right-color:#dfe5ef}body.light .top
                 <div><label>Nome</label><input id="frName"></div><div><label>Código</label><input id="frCode"></div><div><label>País</label><input id="frCountry" value="Brasil"></div>
                 <div><label>Peso mínimo (g)</label><input id="frMin" type="number" step="0.001" value="0"></div><div><label>Peso máximo (g)</label><input id="frMax" type="number" step="0.001" value="0"></div><div><label>Prazo</label><input id="frTime" placeholder="20–30 dias"></div>
                 <div><label>Primeiro peso (g)</label><input id="frFirstWeight" type="number" step="0.001" value="100"></div><div><label>Valor 1º peso (CNY)</label><input id="frFirstFee" type="number" step="0.01" value="0"></div><div><label>Peso adicional (g)</label><input id="frNextWeight" type="number" step="0.001" value="100"></div>
-                <div><label>Valor adicional (CNY)</label><input id="frNextFee" type="number" step="0.01" value="0"></div><div><label>Seguro (CNY)</label><input id="frInsurance" type="number" step="0.01" value="0"></div><div style="display:flex;align-items:center;gap:8px;padding-top:18px"><input id="frFavorite" type="checkbox" style="width:auto"><label style="margin:0">Favorito</label></div>
+                <div><label>Valor adicional (CNY)</label><input id="frNextFee" type="number" step="0.01" value="0"></div><div><label>Taxa de seguro (%)</label><input id="frInsurance" type="number" step="0.01" value="0"></div><div style="display:flex;align-items:center;gap:8px;padding-top:18px"><input id="frFavorite" type="checkbox" style="width:auto"><label style="margin:0">Favorito</label></div>
                 <div style="grid-column:1/-1"><label>Descrição</label><textarea id="frDesc" rows="3"></textarea></div>
             </div>
             <div class="actions"><button class="btn" onclick="closeModal('freightModal')">Cancelar</button><button class="btn primary" onclick="saveFreight()">Salvar frete</button></div>
@@ -561,6 +446,8 @@ const API='/api';
 let products=[], selectedFreight=null, extras=[], freights=[];
 let authMode='login', currentUser=null, quoteCache=[], clientCache=[], orderCache=[], currentMessageQuote=null;
 let editingClientId=null, editingQuoteId=null, editingFreightId=null;
+let calcPrefs={fx:0.72,profit:15,service:0,importTax:0,icms:0,pricingMode:'markup',freightMode:'cheapest',insurance:true,roundMode:'none'};
+let freightCalcTimer=null;
 const $=id=>document.getElementById(id);
 const money=v=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(v)||0);
 const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -625,64 +512,37 @@ async function saveClient(){const name=$('cName').value.trim();if(!name)return a
 async function deleteClient(id){if(confirm('Excluir este cliente?')){try{await del('clients',id);await refresh();toast('Cliente removido')}catch(e){alert(e.message)}}}
 async function loadClients(){const cs=await all('clients');clientCache=cs;$('qClient').innerHTML='<option value="">Cliente não informado</option>'+cs.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('')}
 async function renderClients(){const cs=await all('clients');clientCache=cs;$('clientsTable').innerHTML=cs.length?`<div class="tablewrap"><table class="table"><thead><tr><th>Cliente</th><th>Contato</th><th>Local</th><th>Cadastro</th><th></th></tr></thead><tbody>${cs.map(c=>`<tr><td><b>${esc(c.name)}</b><div class="muted">${esc(c.note||'')}</div></td><td>${esc(c.phone||'—')}<div class="muted">${esc(c.email||'')}</div></td><td>${esc([c.city,c.state].filter(Boolean).join(' / ')||'—')}</td><td>${new Date(c.created).toLocaleDateString('pt-BR')}</td><td><button class="btn" onclick='openClient(${JSON.stringify(c).replace(/'/g,"&#39;")})'>Editar</button> <button class="btn danger" onclick="deleteClient('${c.id}')">Excluir</button></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">Nenhum cliente cadastrado.</div>'}
-function openProductModal(){
-  ['pname','pdims'].forEach(id=>$(id).value='');
-  $('pprice').value='0';$('pqty').value='1';$('pweight').value='0';
-  clearProductImage();
-  $('productModal').classList.add('open');
-  setTimeout(()=>$('pname').focus(),60);
-}
-function clearProductImage(){
-  $('pimage').value='';$('pimage').dataset.data='';
-  $('productImagePreview').src='';$('productImagePreview').classList.add('hide');
-  $('productImageEmpty').classList.remove('hide');$('removeProductImage').classList.add('hide');
-}
-function previewProductImage(event){
-  const file=event.target.files?.[0];
-  if(!file)return;
-  if(!file.type.startsWith('image/')){alert('Selecione uma imagem válida.');clearProductImage();return}
-  if(file.size>6*1024*1024){alert('A imagem deve ter no máximo 6 MB.');clearProductImage();return}
-  const reader=new FileReader();
-  reader.onload=()=>{
-    const img=new Image();
-    img.onload=()=>{
-      const max=900,scale=Math.min(1,max/Math.max(img.width,img.height));
-      const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));
-      const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,canvas.width,canvas.height);
-      const data=canvas.toDataURL('image/jpeg',.82);
-      $('pimage').dataset.data=data;$('productImagePreview').src=data;$('productImagePreview').classList.remove('hide');$('productImageEmpty').classList.add('hide');$('removeProductImage').classList.remove('hide');
-    };
-    img.src=reader.result;
-  };
-  reader.readAsDataURL(file);
-}
-function addProductFromModal(){
-  const name=$('pname').value.trim();
-  if(!name){alert('Informe o nome do produto.');$('pname').focus();return}
-  const price=Math.max(0,+$('pprice').value||0),qty=Math.max(1,+$('pqty').value||1),weight=Math.max(0,+$('pweight').value||0),dims=$('pdims').value.trim();
-  products.push({name,price,qty,weight,dims,image:$('pimage').dataset.data||''});
-  closeModal('productModal');renderProducts();calc();if(products.length===1)loadLocalFreights();
-}
-function removeProduct(i){products.splice(i,1);selectedFreight=null;renderProducts();calc();loadLocalFreights()}
-function safeProductImage(src){return typeof src==='string'&&/^data:image\/(png|jpe?g|webp);base64,/i.test(src)?src:''}
-function renderProducts(){
-  $('products').innerHTML=products.map((p,i)=>{
-    const image=safeProductImage(p.image);
-    const visual=image?`<img class="product-thumb" src="${image}" alt="">`:'<span class="product-no-image">＋</span>';
-    return `<tr><td><div class="product-name-cell">${visual}<div><b>${esc(p.name)}</b>${p.dims?`<div class="muted">${esc(p.dims)} cm</div>`:''}</div></div></td><td>${p.qty}</td><td>¥ ${(p.price*p.qty).toFixed(2)}</td><td>${p.weight*p.qty}g</td><td><button class="btn" onclick="removeProduct(${i})">×</button></td></tr>`;
-  }).join('')||'<tr><td colspan="5" class="muted">Nenhum produto.</td></tr>'
-}
+function scheduleFreightRecalc(){clearTimeout(freightCalcTimer);freightCalcTimer=setTimeout(()=>loadLocalFreights(true),180)}
+function addProduct(){const name=$('pname').value.trim()||'Produto',price=+$('pprice').value||0,qty=Math.max(1,+$('pqty').value||1),weight=Math.max(0,+$('pweight').value||0),dims=$('pdims').value.trim();products.push({name,price,qty,weight,dims});['pname','pdims'].forEach(id=>$(id).value='');$('pprice').value='0';$('pqty').value='1';$('pweight').value='0';renderProducts();selectedFreight=null;calc();scheduleFreightRecalc()}
+function removeProduct(i){products.splice(i,1);selectedFreight=null;renderProducts();calc();scheduleFreightRecalc()}
+function renderProducts(){$('products').innerHTML=products.map((p,i)=>`<tr><td><b>${esc(p.name)}</b>${p.dims?`<div class="muted">${esc(p.dims)} cm</div>`:''}</td><td>${p.qty}</td><td>¥ ${Number(p.price).toFixed(2)}</td><td>¥ ${(p.price*p.qty).toFixed(2)}</td><td>${formatPtNumber(p.weight*p.qty)} g</td><td><button class="btn" onclick="removeProduct(${i})">×</button></td></tr>`).join('')||'<tr><td colspan="6" class="muted">Nenhum produto.</td></tr>';if($('autoWeightBadge'))$('autoWeightBadge').textContent=formatPtNumber(totalWeight())+' g'}
 function totalWeight(){return products.reduce((s,p)=>s+Math.max(0,Number(p.weight)||0)*Math.max(1,Number(p.qty)||1),0)}
 function totalVolume(){return products.reduce((s,p)=>{const parts=String(p.dims||'').toLowerCase().replace(/,/g,'.').split(/[x×*]/).map(Number).filter(Number.isFinite);return s+(parts.length===3?parts.reduce((a,b)=>a*b,1):0)*Math.max(1,Number(p.qty)||1)},0)}
+function productCny(){return products.reduce((s,p)=>s+Number(p.price||0)*Number(p.qty||0),0)}
 function freightCost(){if(!selectedFreight)return{bill:totalWeight(),cny:0};return{bill:totalWeight(),cny:Number(selectedFreight.totalCny||0)}}
-async function loadLocalFreights(){const weight=totalWeight();if(!weight){$('cssbuyStatus').textContent='Adicione produtos com peso para calcular.';$('freightList').innerHTML='<div class="empty">Informe o peso dos produtos.</div>';return}$('cssbuyStatus').textContent='Calculando com sua tabela de fretes...';$('freightList').innerHTML='<div class="empty">Calculando...</div>';try{const data=await api('/freights/calculate',{method:'POST',body:JSON.stringify({weight})});freights=data.freights||[];selectedFreight=freights.find(f=>f.is_favorite)||freights[0]||null;renderFreights();if(selectedFreight)selectFreight(selectedFreight.id);else{$('freightDetails').classList.add('hide');calc();$('cssbuyStatus').textContent='Nenhum frete cadastrado para este peso.'}}catch(e){$('freightList').innerHTML=`<div class="empty">${esc(e.message)}</div>`}}
-function renderFreights(){const q=($('fsearch').value||'').toLowerCase();let list=freights.filter(f=>(f.name+' '+(f.code||'')).toLowerCase().includes(q));const sort=$('fsort').value;if(sort==='name')list.sort((a,b)=>a.name.localeCompare(b.name));if(sort==='price')list.sort((a,b)=>Number(a.totalCny)-Number(b.totalCny));$('freightList').innerHTML=list.map(f=>`<div class="freight ${selectedFreight?.id===f.id?'active':''}" onclick="selectFreight('${f.id}')"><div style="display:flex;justify-content:space-between;gap:12px"><b>${f.is_favorite?'⭐ ':''}${esc(f.name)}</b><strong>¥ ${Number(f.totalCny||0).toFixed(2)}</strong></div><span class="muted">${esc(f.travel_time||'Prazo não informado')} • ${esc(f.code||'')}</span><div class="meta"><span class="tag">1º ¥${Number(f.first_fee||0).toFixed(2)}/${Number(f.first_weight||0)}g</span><span class="tag">+ ¥${Number(f.continue_fee||0).toFixed(2)}/${Number(f.continue_weight||0)}g</span><span class="tag">máx. ${Number(f.max_weight||0)}g</span></div></div>`).join('')||'<div class="empty">Nenhum frete encontrado.</div>'}
-function selectFreight(id){selectedFreight=freights.find(f=>String(f.id)===String(id));if(!selectedFreight)return;renderFreights();$('freightDetails').classList.remove('hide');$('freightDetails').innerHTML=`<b>${esc(selectedFreight.name)}</b><br>Custo calculado: <b>¥${Number(selectedFreight.totalCny||0).toFixed(2)}</b><br>Prazo: ${esc(selectedFreight.travel_time||'Não informado')}<br>1º peso: ¥${Number(selectedFreight.first_fee||0).toFixed(2)} / ${Number(selectedFreight.first_weight||0)}g<br>Adicional: ¥${Number(selectedFreight.continue_fee||0).toFixed(2)} / ${Number(selectedFreight.continue_weight||0)}g<br>${esc(selectedFreight.description||'')}`;calc()}
+function travelDays(f){const nums=String(f?.travel_time||'').match(/\d+/g)||[];return nums.length?Math.max(...nums.map(Number)):9999}
+function chooseAutomaticFreight(list){if(!list.length)return null;const mode=calcPrefs.freightMode||'cheapest';if(mode==='favorite'){const fav=list.filter(f=>f.is_favorite).sort((a,b)=>Number(a.totalCny)-Number(b.totalCny));if(fav.length)return fav[0]}if(mode==='fastest')return [...list].sort((a,b)=>travelDays(a)-travelDays(b)||Number(a.totalCny)-Number(b.totalCny))[0];return [...list].sort((a,b)=>Number(a.totalCny)-Number(b.totalCny))[0]}
+async function loadLocalFreights(silent=false){const weight=totalWeight();if(!weight){freights=[];selectedFreight=null;renderFreights();calc();return}if($('autoFreightBadge'))$('autoFreightBadge').textContent='Calculando...';try{const data=await api('/freights/calculate',{method:'POST',body:JSON.stringify({weight})});freights=data.freights||[];selectedFreight=chooseAutomaticFreight(freights);renderFreights();renderAutoFreight();calc()}catch(e){freights=[];selectedFreight=null;renderFreights();renderAutoFreight(e.message);calc()}}
+function renderAutoFreight(error=''){const box=$('autoFreightHero'),badge=$('autoFreightBadge');if(!box)return;if(error){box.className='auto-freight-empty';box.innerHTML=`<b>Não foi possível calcular o frete</b><span>${esc(error)}</span>`;badge.textContent='Erro';return}if(!selectedFreight){box.className='auto-freight-empty';box.innerHTML='<b>Nenhum frete compatível</b><span>Cadastre uma linha de frete compatível com o peso atual.</span>';badge.textContent=products.length?'Sem opção':'Aguardando produtos';return}box.className='auto-freight-selected';box.innerHTML=`<div><span class="badge green">SELECIONADO AUTOMATICAMENTE</span><b style="margin-top:8px">${esc(selectedFreight.name)}</b><div class="meta">${esc(selectedFreight.code||'')} · ${esc(selectedFreight.travel_time||'Prazo não informado')} · ${formatPtNumber(totalWeight())} g</div></div><div class="price">¥ ${Number(selectedFreight.totalCny||0).toFixed(2)}</div>`;badge.textContent=calcPrefs.freightMode==='fastest'?'Mais rápido':calcPrefs.freightMode==='favorite'?'Preferencial':'Menor custo'}
+function renderFreights(){const list=[...freights].sort((a,b)=>Number(a.totalCny)-Number(b.totalCny));$('freightList').innerHTML=list.map(f=>`<div class="freight ${selectedFreight?.id===f.id?'active':''}" onclick="selectFreight('${f.id}')"><div style="display:flex;justify-content:space-between;gap:12px"><b>${f.is_favorite?'⭐ ':''}${esc(f.name)}</b><strong>¥ ${Number(f.totalCny||0).toFixed(2)}</strong></div><span class="muted">${esc(f.travel_time||'Prazo não informado')} • ${esc(f.code||'')}</span></div>`).join('')||'<div class="empty">Nenhum frete disponível para este peso.</div>'}
+function selectFreight(id){selectedFreight=freights.find(f=>String(f.id)===String(id));if(!selectedFreight)return;renderFreights();renderAutoFreight();calc()}
 function addExtra(){const description=$('extraDesc').value.trim();const value=Number($('extraValue').value)||0;if(!description)return alert('Informe a descrição.');extras.push({description,value});$('extraDesc').value='';$('extraValue').value='0';renderExtras();calc()}
 function removeExtra(i){extras.splice(i,1);renderExtras();calc()}
 function renderExtras(){$('extrasList').innerHTML=extras.map((x,i)=>`<div class="freight"><div style="display:flex;justify-content:space-between"><span>${esc(x.description)}</span><b>${money(x.value)}</b></div><button class="btn" style="margin-top:8px" onclick="removeExtra(${i})">Remover</button></div>`).join('')||'<div class="muted">Nenhum adicional.</div>'}
-function calc(){const fx=+$('fx').value||0,profit=(+$('profit').value||0)/100,service=(+$('service').value||0)/100,tax=(+$('importTax').value||0)/100,icms=(+$('icms').value||0)/100,prod=products.reduce((s,p)=>s+p.price*p.qty,0)*fx,fr=freightCost(),freight=fr.cny*fx,extraTotal=extras.reduce((s,x)=>s+Number(x.value||0),0),base=prod+freight+extraTotal,importValue=base*tax,icmsValue=(base+importValue)*icms,taxes=importValue+icmsValue,subtotal=base+taxes,serviceValue=subtotal*service,afterService=subtotal+serviceValue,profitValue=afterService*profit,final=afterService+profitValue;$('rProducts').textContent=money(prod);$('rFreight').textContent=money(freight);$('rTax').textContent=money(taxes);$('rWeight').textContent=fr.bill+' g';$('rFinal').textContent=money(final);$('rProfit').textContent='Lucro estimado: '+money(profitValue);return{prod,freight,extraTotal,base,importValue,icmsValue,taxes,subtotal,serviceValue,afterService,profitValue,final,lucro:profitValue,weight:fr.bill}}
-function quoteSnapshot(){const s=calc();return{clientId:$('qClient').value||null,products:products.map(p=>({...p})),freight:selectedFreight?{...selectedFreight}:null,extras:extras.map(x=>({...x})),notes:$('qNotes').value.trim(),fx:+$('fx').value||0,profit:+$('profit').value||0,service:+$('service').value||0,importTax:+$('importTax').value||0,icms:+$('icms').value||0,totalText:$('rFinal').textContent,weight:s.weight}}
+function roundFinal(v){const mode=String(calcPrefs.roundMode||'none');if(mode==='none')return v;const step=Number(mode)||0;return step>0?Math.ceil(v/step)*step:v}
+function calc(){
+ const fx=+$('fx').value||calcPrefs.fx||0, profitPct=(+$('profit').value||0)/100, servicePct=(+$('service').value||0)/100, taxPct=(+$('importTax').value||0)/100, icmsPct=(+$('icms').value||0)/100;
+ const prodCny=productCny(), prod=prodCny*fx, fr=freightCost(), freight=fr.cny*fx, extraTotal=extras.reduce((s,x)=>s+Number(x.value||0),0);
+ const insuranceOverride=$('quoteInsurance')?.value||'auto';const insuranceOn=insuranceOverride==='on'||(insuranceOverride==='auto'&&calcPrefs.insurance!==false);const insuranceRate=insuranceOn?Math.max(0,Number(selectedFreight?.insurance_fee??selectedFreight?.insuranceFee??0))/100:0;const insuranceCny=prodCny*insuranceRate,insurance=insuranceCny*fx;
+ const customsBase=prod+freight+insurance;const importValue=customsBase*taxPct;const preIcms=customsBase+importValue;const icmsValue=icmsPct>0&&icmsPct<1?(preIcms/(1-icmsPct)-preIcms):preIcms*icmsPct;
+ const operatingBase=preIcms+icmsValue+extraTotal;const serviceValue=operatingBase*servicePct;const cost=operatingBase+serviceValue;
+ let finalRaw,profitValue; if(calcPrefs.pricingMode==='margin'&&profitPct>0&&profitPct<.95){finalRaw=cost/(1-profitPct);profitValue=finalRaw-cost}else{profitValue=cost*profitPct;finalRaw=cost+profitValue}const final=roundFinal(finalRaw);profitValue=final-cost;
+ const put=(id,v)=>{if($(id))$(id).textContent=money(v)};put('rProducts',prod);put('rFreight',freight);put('rInsurance',insurance);put('rExtras',extraTotal);put('rImportTax',importValue);put('rIcms',icmsValue);put('rService',serviceValue);put('rCost',cost);put('rProfitValue',profitValue);$('rTax')&&($('rTax').textContent=money(importValue+icmsValue));$('rWeight').textContent=formatPtNumber(fr.bill)+' g';$('rFinal').textContent=money(final);$('rProfit').textContent='Lucro: '+money(profitValue);if($('rInsuranceRate'))$('rInsuranceRate').textContent=insuranceRate?`(${(insuranceRate*100).toFixed(2).replace('.',',')}%)`:'';
+ if($('ruleSummary'))$('ruleSummary').textContent=`Câmbio ${fx.toFixed(4).replace('.',',')} · ${calcPrefs.pricingMode==='margin'?'Margem':'Markup'} ${(profitPct*100).toFixed(1).replace('.',',')}% · Imp. ${(taxPct*100).toFixed(1).replace('.',',')}% · ICMS ${(icmsPct*100).toFixed(1).replace('.',',')}% · Frete ${calcPrefs.freightMode==='fastest'?'mais rápido':calcPrefs.freightMode==='favorite'?'preferencial':'mais barato'}`;
+ const card=document.querySelector('.final-card');if(card){card.classList.remove('calc-flash');void card.offsetWidth;card.classList.add('calc-flash')}
+ return{prod,prodCny,freight,insurance,insuranceRate,extraTotal,customsBase,importValue,icmsValue,taxes:importValue+icmsValue,serviceValue,cost,profitValue,final,lucro:profitValue,weight:fr.bill};
+}
+function quoteSnapshot(){const s=calc();return{clientId:$('qClient').value||null,products:products.map(p=>({...p})),freight:selectedFreight?{...selectedFreight,insuranceRate:s.insuranceRate}:null,extras:extras.map(x=>({...x})),notes:$('qNotes').value.trim(),fx:+$('fx').value||calcPrefs.fx||0,profit:+$('profit').value||0,service:+$('service').value||0,importTax:+$('importTax').value||0,icms:+$('icms').value||0,totalText:$('rFinal').textContent,weight:s.weight,calculation:s}}
 async function saveQuote(){if(!products.length)return alert('Adicione pelo menos um produto.');try{const s=quoteSnapshot();if(editingQuoteId){await api('/quotes/'+editingQuoteId,{method:'PATCH',body:JSON.stringify(s)});toast('Orçamento atualizado')}else{await api('/quotes',{method:'POST',body:JSON.stringify(s)});toast('Orçamento salvo no banco de dados!')}editingQuoteId=null;newQuote(false);await refresh();go('quotes')}catch(e){alert(e.message)}}
 async function convertToOrder(id){try{await api('/quotes/'+id+'/convert',{method:'POST'});toast('Orçamento transformado em pedido');await refresh();closeModal('detailModal')}catch(e){alert(e.message)}}
 async function viewQuote(id){
@@ -735,7 +595,7 @@ async function loadAdmin(){if(currentUser?.role!=='admin')return;const d=await a
 async function adminToggleRole(id,role){try{await api('/admin/users/'+id+'/role',{method:'PATCH',body:JSON.stringify({role})});await loadAdmin();toast('Perfil atualizado')}catch(e){alert(e.message)}}
 async function adminDeleteUser(id){if(!confirm('Excluir este usuário e todos os dados dele?'))return;try{await api('/admin/users/'+id,{method:'DELETE'});await loadAdmin();toast('Usuário excluído')}catch(e){alert(e.message)}}
 async function refresh(){await loadClients();await renderClients();await renderQuotes();await renderOrders();await renderFreightPage();const d=await api('/dashboard');$('dQuotes').textContent=d.quotes;$('dClients').textContent=d.clients;$('dOrders').textContent=d.orders;$('dRevenue').textContent=money(d.revenue);$('dPaid').textContent=d.paid+' pagos';$('dashRecent').innerHTML=quoteCache.slice(0,5).map(q=>`<div style="padding:9px 0;border-bottom:1px solid #ffffff0d"><b>${esc(q.code||q.id)}</b> · ${esc(q.totalText||'R$ 0,00')}<br><span class="muted">${new Date(q.created).toLocaleString('pt-BR')}</span></div>`).join('')||'Nenhum orçamento ainda.';await loadSettings()}
-function newQuote(clear=true){editingQuoteId=null;products=[];selectedFreight=null;extras=[];renderProducts();renderExtras();$('qClient').value='';$('qNotes').value='';$('freightList').innerHTML='';$('freightDetails').classList.add('hide');$('cssbuyStatus').textContent='Os fretes são gerenciados por você. Nenhuma conta CSSBuy é necessária.';calc();if(clear)toast('Orçamento limpo')}
+function newQuote(clear=true){editingQuoteId=null;products=[];selectedFreight=null;extras=[];renderProducts();renderExtras();$('qClient').value='';$('qNotes').value='';freights=[];renderFreights();renderAutoFreight();applyCalcPrefs();if(clear)toast('Orçamento limpo')}
 function copyQuote(){const s=quoteSnapshot();navigator.clipboard?.writeText(`FORWARDPRO — ORÇAMENTO\nCliente: ${$('qClient').selectedOptions[0]?.text||'—'}\nFrete: ${selectedFreight?.name||'—'}\nPeso: ${s.weight}g\nAdicionais: ${money(s.extraTotal||0)}\nTOTAL: ${s.totalText}`);toast('Orçamento copiado')}
 
 function formatPtNumber(v){return Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
@@ -744,20 +604,21 @@ async function openClientMessage(id){try{const q=await api('/quotes/'+id);genera
 async function copyClientMessage(){const text=$('clientMessage').value;if(!text)return;try{await navigator.clipboard.writeText(text);toast('Mensagem copiada para o WhatsApp')}catch{const ta=$('clientMessage');ta.select();document.execCommand('copy');toast('Mensagem copiada')}}
 function openClientWhatsApp(){if(!currentMessageQuote)return;let phone=String(currentMessageQuote.phone||'').replace(/\D/g,'');if(!phone){toast('Este cliente não possui WhatsApp cadastrado');return}if(phone.length===10||phone.length===11)phone='55'+phone;const text=encodeURIComponent($('clientMessage').value);window.open(`https://wa.me/${phone}?text=${text}`,'_blank','noopener,noreferrer')}
 function toast(t){const x=document.createElement('div');x.className='toast';x.textContent=t;document.body.appendChild(x);setTimeout(()=>x.remove(),2200)}
-async function saveSettings(){try{const d=await api('/settings',{method:'PUT',body:JSON.stringify({defaultProfit:+$('defaultProfit').value||15})});$('profit').value=d.defaultProfit;toast('Configurações salvas')}catch(e){alert(e.message)}}
-async function loadSettings(){try{const d=await api('/settings');$('defaultProfit').value=d.defaultProfit;$('profit').value=d.defaultProfit}catch{}}
+async function saveSettings(){return saveAdvancedSettings()}
+async function loadSettings(){try{const d=await api('/settings');calcPrefs={fx:Number(d.defaultFx??0.72),profit:Number(d.defaultProfit??15),service:Number(d.defaultService??0),importTax:Number(d.defaultImportTax??0),icms:Number(d.defaultIcms??0),pricingMode:d.pricingMode||'markup',freightMode:d.freightMode||'cheapest',insurance:d.autoInsurance!==false,roundMode:d.roundMode||'none'};applyCalcPrefs()}catch{applyCalcPrefs()}}
 async function clearDB(){if(confirm('Isso apagará clientes, orçamentos e pedidos da sua conta. Continuar?')){await api('/reset',{method:'POST'});await refresh();toast('Dados apagados')}}
 function getTheme(){return localStorage.getItem('fp_theme')||'dark'}
 function setTheme(theme){localStorage.setItem('fp_theme',theme);document.body.classList.toggle('light',theme==='light');const b=$('themeToggle');if(b)b.textContent=theme==='light'?'☀':'☾';const s=$('darkModeSwitch');if(s)s.checked=theme!=='light'}
 function toggleTheme(){setTheme(getTheme()==='light'?'dark':'light')}
 function setMotion(on){document.body.classList.toggle('no-motion',!on);localStorage.setItem('fp_motion',on?'1':'0')}
-function syncSettingsUI(){setTheme(getTheme());setMotion(localStorage.getItem('fp_motion')!=='0');setAuthMode('login',false);if(currentUser){$('settingsUserName').textContent=currentUser.name;$('settingsUserEmail').textContent=currentUser.email;$('settingsRole').textContent=currentUser.role}const p=JSON.parse(localStorage.getItem('fp_prefs')||'{}');if(p.fx)$('defaultFx').value=p.fx;if(p.importTax!=null)$('defaultImportTax').value=p.importTax;if(p.icms!=null)$('defaultIcms').value=p.icms}
-function saveAdvancedSettings(){const p={fx:+$('defaultFx').value||0.72,importTax:+$('defaultImportTax').value||0,icms:+$('defaultIcms').value||0};localStorage.setItem('fp_prefs',JSON.stringify(p));saveSettings();$('fx').value=p.fx;$('importTax').value=p.importTax;$('icms').value=p.icms;toast('Preferências salvas')}
+function applyCalcPrefs(){if($('fx'))$('fx').value=calcPrefs.fx;if($('profit'))$('profit').value=calcPrefs.profit;if($('service'))$('service').value=calcPrefs.service;if($('importTax'))$('importTax').value=calcPrefs.importTax;if($('icms'))$('icms').value=calcPrefs.icms;calc()}
+function syncSettingsUI(){setTheme(getTheme());setMotion(localStorage.getItem('fp_motion')!=='0');setAuthMode('login',false);if(currentUser){$('settingsUserName').textContent=currentUser.name;$('settingsUserEmail').textContent=currentUser.email;$('settingsRole').textContent=currentUser.role}const map={defaultFx:calcPrefs.fx,defaultProfit:calcPrefs.profit,defaultService:calcPrefs.service,defaultImportTax:calcPrefs.importTax,defaultIcms:calcPrefs.icms,defaultPricingMode:calcPrefs.pricingMode,defaultFreightMode:calcPrefs.freightMode,defaultRoundMode:calcPrefs.roundMode};Object.entries(map).forEach(([id,v])=>{if($(id))$(id).value=v});if($('defaultInsurance'))$('defaultInsurance').checked=calcPrefs.insurance!==false}
+async function saveAdvancedSettings(){const body={defaultFx:+$('defaultFx').value||0.72,defaultProfit:+$('defaultProfit').value||0,defaultService:+$('defaultService').value||0,defaultImportTax:+$('defaultImportTax').value||0,defaultIcms:+$('defaultIcms').value||0,pricingMode:$('defaultPricingMode').value,freightMode:$('defaultFreightMode').value,autoInsurance:$('defaultInsurance').checked,roundMode:$('defaultRoundMode').value};try{const d=await api('/settings',{method:'PUT',body:JSON.stringify(body)});calcPrefs={fx:Number(d.defaultFx),profit:Number(d.defaultProfit),service:Number(d.defaultService),importTax:Number(d.defaultImportTax),icms:Number(d.defaultIcms),pricingMode:d.pricingMode,freightMode:d.freightMode,insurance:d.autoInsurance,roundMode:d.roundMode};applyCalcPrefs();syncSettingsUI();scheduleFreightRecalc();toast('Regras automáticas salvas')}catch(e){alert(e.message)}}
 function exportLocalSettings(){const data={theme:getTheme(),motion:localStorage.getItem('fp_motion')!=='0',preferences:JSON.parse(localStorage.getItem('fp_prefs')||'{}')};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='forwardpro-preferencias.json';a.click();URL.revokeObjectURL(a.href);toast('Preferências exportadas')}
 function renderReports(){const revenue=orderCache.reduce((s,o)=>s+Number(o.totalNumeric||o.total||0),0);const done=orderCache.filter(o=>o.status==='Finalizado').length;const conv=quoteCache.length?Math.round(orderCache.length/quoteCache.length*100):0;$('rRevenue').textContent=money(revenue);$('rTicket').textContent=money(orderCache.length?revenue/orderCache.length:0);$('rDone').textContent=done;$('rConversion').textContent=conv+'%';const counts={};orderCache.forEach(o=>counts[o.status]=(counts[o.status]||0)+1);$('reportStatuses').innerHTML=Object.entries(counts).map(([k,v])=>`<div class="step"><b>${v}</b><div><span>${esc(k)}</span><small>pedido(s)</small></div></div>`).join('')||'<span class="muted">Nenhum pedido.</span>';const clients={};orderCache.forEach(o=>clients[o.clientName||'Sem cliente']=(clients[o.clientName||'Sem cliente']||0)+1);$('reportClients').innerHTML=Object.entries(clients).sort((a,b)=>b[1]-a[1]).slice(0,6).map(([k,v])=>`<div class="step"><b>${v}</b><div><span>${esc(k)}</span><small>pedido(s)</small></div></div>`).join('')||'<span class="muted">Nenhum pedido.</span>'}
 function renderActivity(){const items=[...quoteCache.map(q=>({date:q.created,text:`Orçamento ${q.code||q.id} criada`,sub:q.clientName||'Sem cliente'})),...orderCache.map(o=>({date:o.created,text:`Pedido ${o.code||o.id} · ${o.status}`,sub:o.clientName||'Sem cliente'})),...clientCache.map(c=>({date:c.created,text:`Cliente ${c.name} cadastrado`,sub:c.email||c.phone||''}))].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,20);$('activityList').innerHTML=items.map(x=>`<div class="step"><b>•</b><div><span>${esc(x.text)}</span><small>${esc(x.sub)} · ${new Date(x.date).toLocaleString('pt-BR')}</small></div></div>`).join('')||'<span class="muted">Nenhuma atividade.</span>'}
 
-['fx','profit','service','importTax','icms'].forEach(id=>$(id).addEventListener('input',calc));['fsearch','fsort','fcat'].forEach(id=>$(id).addEventListener('input',renderFreights));$('quoteSearch').addEventListener('input',renderQuotes);
+['fx','profit','service','importTax','icms'].forEach(id=>$(id)?.addEventListener('input',calc));$('quoteInsurance')?.addEventListener('change',calc);$('quoteSearch').addEventListener('input',renderQuotes);
 setTheme(getTheme());setMotion(localStorage.getItem('fp_motion')!=='0');setAuthMode('login',false);document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='j'){e.preventDefault();toggleTheme()}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();go('calculator')}});(async()=>{renderProducts();renderExtras();calc();await bootAuth()})().catch(e=>console.error(e));
 
     </script>
