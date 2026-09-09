@@ -2,6 +2,28 @@
 // ForwardPro v4 — operation enhancements
 (() => {
   const $id=id=>document.getElementById(id);
+  function productList() {
+  return Array.isArray(products)
+    ? products
+    : [];
+}
+  function internalFreightCny() {
+  return productList().reduce(
+    (sum, product) =>
+      sum + Number(product.internalFreightCny || 0),
+    0
+  );
+}
+
+function goodsCny() {
+  return productList().reduce(
+    (sum, product) =>
+      sum +
+      Number(product.price || 0) *
+      Number(product.qty || 1),
+    0
+  );
+}
   let editingProductIndex=null, productImageData=null, liveFxTimer=null, siteSettings={};
   const originalLoadAdmin=window.loadAdmin;
   const originalRefresh=window.refresh;
@@ -9,8 +31,27 @@
   function clientName(id){return (window.clientCache||clientCache||[]).find(c=>String(c.id)===String(id))?.name||'Cliente'}
   function selectedParticipantIds(){return [...document.querySelectorAll('.participant-check:checked')].map(x=>x.value)}
   function currentQuoteMode(){return $id('quoteMode')?.value||'individual'}
-  function internalFreightCny(){return (window.products||products||[]).reduce((s,p)=>s+Number(p.internalFreightCny||0),0)}
-  function goodsCny(){return (window.products||products||[]).reduce((s,p)=>s+Number(p.price||0)*Number(p.qty||1),0)}
+  function internalFreightCny() {
+  const list = Array.isArray(products) ? products : [];
+
+  return list.reduce(
+    (sum, product) =>
+      sum + Number(product.internalFreightCny || 0),
+    0
+  );
+}
+
+function goodsCny() {
+  const list = Array.isArray(products) ? products : [];
+
+  return list.reduce(
+    (sum, product) =>
+      sum +
+      Number(product.price || 0) *
+      Number(product.qty || 1),
+    0
+  );
+}
 
   function injectCalculatorEnhancements(){
     const calcPage=$id('page-calculator'); if(!calcPage)return;
