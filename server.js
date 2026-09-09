@@ -27,7 +27,7 @@ const pool = new Pool({
 
 app.disable('x-powered-by');
 app.use(cors());
-app.use(express.json({ limit: '2mb' }));
+app.use(express.json({ limit: '6mb' }));
 
 function code(prefix) {
   return `${prefix}-${Date.now().toString(36).toUpperCase()}-${crypto.randomBytes(2).toString('hex').toUpperCase()}`;
@@ -113,29 +113,6 @@ ALTER TABLE orders ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'Pedido
       default_profit NUMERIC(8,3) NOT NULL DEFAULT 15,
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
-    ALTER TABLE user_settings
-ADD COLUMN IF NOT EXISTS default_fx NUMERIC(12,6) NOT NULL DEFAULT 0.72;
-
-ALTER TABLE user_settings
-ADD COLUMN IF NOT EXISTS default_service NUMERIC(8,3) NOT NULL DEFAULT 0;
-
-ALTER TABLE user_settings
-ADD COLUMN IF NOT EXISTS default_import_tax NUMERIC(8,3) NOT NULL DEFAULT 0;
-
-ALTER TABLE user_settings
-ADD COLUMN IF NOT EXISTS default_icms NUMERIC(8,3) NOT NULL DEFAULT 0;
-
-ALTER TABLE user_settings
-ADD COLUMN IF NOT EXISTS pricing_mode TEXT NOT NULL DEFAULT 'markup';
-
-ALTER TABLE user_settings
-ADD COLUMN IF NOT EXISTS freight_mode TEXT NOT NULL DEFAULT 'cheapest';
-
-ALTER TABLE user_settings
-ADD COLUMN IF NOT EXISTS auto_insurance BOOLEAN NOT NULL DEFAULT true;
-
-ALTER TABLE user_settings
-ADD COLUMN IF NOT EXISTS round_mode TEXT NOT NULL DEFAULT 'none';
     CREATE TABLE IF NOT EXISTS freights (
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
       user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -156,6 +133,23 @@ ADD COLUMN IF NOT EXISTS round_mode TEXT NOT NULL DEFAULT 'none';
     ALTER TABLE clients ADD COLUMN IF NOT EXISTS zip TEXT;
     ALTER TABLE quotes ADD COLUMN IF NOT EXISTS notes TEXT;
     ALTER TABLE quotes ADD COLUMN IF NOT EXISTS extras JSONB NOT NULL DEFAULT '[]'::jsonb;
+    ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS default_fx NUMERIC(12,6) NOT NULL DEFAULT 0.72;
+    ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS default_service NUMERIC(8,3) NOT NULL DEFAULT 0;
+    ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS default_import_tax NUMERIC(8,3) NOT NULL DEFAULT 0;
+    ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS default_icms NUMERIC(8,3) NOT NULL DEFAULT 0;
+    ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS pricing_mode TEXT NOT NULL DEFAULT 'markup';
+    ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS freight_mode TEXT NOT NULL DEFAULT 'cheapest';
+    ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS auto_insurance BOOLEAN NOT NULL DEFAULT true;
+    ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS round_mode TEXT NOT NULL DEFAULT 'none';
+    ALTER TABLE quotes ADD COLUMN IF NOT EXISTS quote_type TEXT NOT NULL DEFAULT 'individual';
+    ALTER TABLE quotes ADD COLUMN IF NOT EXISTS participants JSONB NOT NULL DEFAULT '[]'::jsonb;
+    ALTER TABLE quotes ADD COLUMN IF NOT EXISTS split_method TEXT NOT NULL DEFAULT 'equal';
+    ALTER TABLE quotes ADD COLUMN IF NOT EXISTS participant_breakdown JSONB NOT NULL DEFAULT '[]'::jsonb;
+    ALTER TABLE quotes ADD COLUMN IF NOT EXISTS fx_source TEXT NOT NULL DEFAULT 'manual';
+    ALTER TABLE orders ADD COLUMN IF NOT EXISTS participants JSONB NOT NULL DEFAULT '[]'::jsonb;
+    ALTER TABLE orders ADD COLUMN IF NOT EXISTS participant_breakdown JSONB NOT NULL DEFAULT '[]'::jsonb;
+    CREATE TABLE IF NOT EXISTS site_settings (id INTEGER PRIMARY KEY CHECK(id=1), settings JSONB NOT NULL DEFAULT '{}'::jsonb, updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW());
+    INSERT INTO site_settings(id,settings) VALUES(1,'{}'::jsonb) ON CONFLICT(id) DO NOTHING;
   `);
 
   // Preenche o total numérico para dados antigos.
@@ -326,7 +320,7 @@ app.get('/api/quotes', auth, async (req, res) => {
   const r = await pool.query(`
     SELECT q.id,q.code,q.status,q.products,q.freight,q.fx,q.profit,q.service,
       q.import_tax AS "importTax",q.icms,q.notes,q.extras,q.total_text AS "totalText",q.total_numeric AS "totalNumeric",
-      q.weight_grams AS "weightGrams",q.created_at AS created,q.client_id AS "clientId",c.name AS "clientName"
+      q.weight_grams AS "weightGrams",q.quote_type AS "quoteType",q.participants,q.split_method AS "splitMethod",q.participant_breakdown AS "participantBreakdown",q.fx_source AS "fxSource",q.created_at AS created,q.client_id AS "clientId",c.name AS "clientName"
     FROM quotes q
     LEFT JOIN clients c ON c.id=q.client_id
     WHERE q.user_id=$1 ORDER BY q.created_at DESC`,
@@ -352,12 +346,12 @@ app.post('/api/quotes', auth, async (req, res) => {
     const weight = Number(s.weight || products.reduce((sum, p) => sum + Number(p.weight || 0) * Number(p.qty || 1), 0));
     const r = await pool.query(`
       INSERT INTO quotes
-        (code,user_id,client_id,products,freight,fx,profit,service,import_tax,icms,notes,extras,total_text,total_numeric,weight_grams,status)
-      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,'Cotação')
+        (code,user_id,client_id,products,freight,fx,profit,service,import_tax,icms,notes,extras,total_text,total_numeric,weight_grams,quote_type,participants,split_method,participant_breakdown,fx_source,status)
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,'Cotação')
       RETURNING *`,
       [code('ORC'), req.user.id, s.clientId || null, JSON.stringify(products), JSON.stringify(s.freight || null),
        Number(s.fx || 0), Number(s.profit || 0), Number(s.service || 0), Number(s.importTax || 0), Number(s.icms || 0), String(s.notes || ''), JSON.stringify(Array.isArray(s.extras)?s.extras:[]),
-       String(s.totalText || 'R$ 0,00'), totalNumeric, weight]
+       String(s.totalText || 'R$ 0,00'), totalNumeric, weight, s.quoteType==='shared'?'shared':'individual', JSON.stringify(Array.isArray(s.participants)?s.participants:[]), ['equal','weight','value'].includes(s.splitMethod)?s.splitMethod:'equal', JSON.stringify(Array.isArray(s.participantBreakdown)?s.participantBreakdown:[]), s.fxSource==='live'?'live':'manual']
     );
 
     await pool.query(
@@ -376,7 +370,7 @@ app.patch('/api/quotes/:id', auth, async (req,res)=>{
   try{
     const s=req.body||{}; const products=Array.isArray(s.products)?s.products:[]; if(!products.length)return res.status(400).json({error:'A cotação precisa ter produtos.'});
     const totalNumeric=moneyToNumber(s.totalText); const weight=Number(s.weight||products.reduce((sum,p)=>sum+Number(p.weight||0)*Number(p.qty||1),0));
-    const r=await pool.query(`UPDATE quotes SET client_id=$1,products=$2,freight=$3,fx=$4,profit=$5,service=$6,import_tax=$7,icms=$8,notes=$9,extras=$10,total_text=$11,total_numeric=$12,weight_grams=$13 WHERE id=$14 AND user_id=$15 RETURNING *`,[s.clientId||null,JSON.stringify(products),JSON.stringify(s.freight||null),Number(s.fx||0),Number(s.profit||0),Number(s.service||0),Number(s.importTax||0),Number(s.icms||0),String(s.notes||''),JSON.stringify(Array.isArray(s.extras)?s.extras:[]),String(s.totalText||'R$ 0,00'),totalNumeric,weight,req.params.id,req.user.id]);
+    const r=await pool.query(`UPDATE quotes SET client_id=$1,products=$2,freight=$3,fx=$4,profit=$5,service=$6,import_tax=$7,icms=$8,notes=$9,extras=$10,total_text=$11,total_numeric=$12,weight_grams=$13,quote_type=$14,participants=$15,split_method=$16,participant_breakdown=$17,fx_source=$18 WHERE id=$19 AND user_id=$20 RETURNING *`,[s.clientId||null,JSON.stringify(products),JSON.stringify(s.freight||null),Number(s.fx||0),Number(s.profit||0),Number(s.service||0),Number(s.importTax||0),Number(s.icms||0),String(s.notes||''),JSON.stringify(Array.isArray(s.extras)?s.extras:[]),String(s.totalText||'R$ 0,00'),totalNumeric,weight,s.quoteType==='shared'?'shared':'individual',JSON.stringify(Array.isArray(s.participants)?s.participants:[]),['equal','weight','value'].includes(s.splitMethod)?s.splitMethod:'equal',JSON.stringify(Array.isArray(s.participantBreakdown)?s.participantBreakdown:[]),s.fxSource==='live'?'live':'manual',req.params.id,req.user.id]);
     if(!r.rowCount)return res.status(404).json({error:'Cotação não encontrada.'});
     await pool.query('INSERT INTO quote_history(quote_id,user_id,action,details) VALUES($1,$2,$3,$4)',[req.params.id,req.user.id,'updated',JSON.stringify({total:totalNumeric})]);
     res.json(r.rows[0]);
@@ -394,10 +388,10 @@ app.post('/api/quotes/:id/convert', auth, async (req, res) => {
     if (row.status === 'Convertida') throw Object.assign(new Error('Cotação já convertida.'), { status: 409 });
 
     const o = await client.query(`
-      INSERT INTO orders(code,user_id,quote_id,client_id,products,freight,fx,total_text,total_numeric,status)
-      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,'Pedido')
+      INSERT INTO orders(code,user_id,quote_id,client_id,products,freight,fx,total_text,total_numeric,participants,participant_breakdown,status)
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,'Pedido')
       RETURNING id,code,status,quote_id AS "quoteId",client_id AS "clientId",total_text AS "totalText",total_numeric AS "totalNumeric",created_at AS created`,
-      [code('PD'), req.user.id, row.id, row.client_id, row.products, row.freight, row.fx, row.total_text, row.total_numeric]
+      [code('PD'), req.user.id, row.id, row.client_id, row.products, row.freight, row.fx, row.total_text, row.total_numeric, row.participants||[], row.participant_breakdown||[]]
     );
 
     await client.query("UPDATE quotes SET status='Convertida' WHERE id=$1", [row.id]);
@@ -483,17 +477,29 @@ app.get('/api/quotes/:id/pdf',auth,async(req,res)=>{
   try{
     const r=await pool.query(`SELECT q.*,c.name AS client_name,c.phone,c.email,c.address,c.city,c.state,c.zip FROM quotes q LEFT JOIN clients c ON c.id=q.client_id WHERE q.id=$1 AND q.user_id=$2`,[req.params.id,req.user.id]);
     if(!r.rowCount)return res.status(404).json({error:'Cotação não encontrada.'});
-    const q=r.rows[0], products=Array.isArray(q.products)?q.products:[], extras=Array.isArray(q.extras)?q.extras:[], freight=q.freight||{};
+    const q=r.rows[0], allProducts=Array.isArray(q.products)?q.products:[], extras=Array.isArray(q.extras)?q.extras:[], freight=q.freight||{};
+    const settingR=await pool.query('SELECT settings FROM site_settings WHERE id=1');
+    const brandSettings=settingR.rows[0]?.settings||{};
+    const participantId=String(req.query.participant||'');
+    const participantBreakdown=Array.isArray(q.participant_breakdown)?q.participant_breakdown:[];
+    const participantRow=participantId?participantBreakdown.find(x=>String(x.clientId||x.client_id)===participantId):null;
+    let participantClient=null;
+    if(participantId){const cr=await pool.query('SELECT name,phone,email,address,city,state,zip FROM clients WHERE id=$1 AND user_id=$2',[participantId,req.user.id]);participantClient=cr.rows[0]||null;}
+    const products=participantId?allProducts.filter(p=>String(p.ownerId||p.owner_id||'')===participantId):allProducts;
     const fx=Number(q.fx||0);
     const productCny=products.reduce((sum,p)=>sum+(Number(p.price)||0)*(Number(p.qty)||1),0);
-    const productBrl=productCny*fx;
-    const freightCny=Number(freight.totalCny||freight.total_fee||0), freightBrl=freightCny*fx;
-    const extraTotal=extras.reduce((sum,x)=>sum+Number(x.value||0),0);
+    const internalCny=products.reduce((sum,p)=>sum+Number(p.internalFreightCny||0),0);
+    const computedProductBrl=(productCny+internalCny)*fx;
+    const productBrl=participantRow?Number(participantRow.products||computedProductBrl):computedProductBrl;
+    const freightAllCny=Number(freight.totalCny||freight.total_fee||0);
+    const freightBrl=participantRow?Number(participantRow.freight||0):freightAllCny*fx;
+    const freightCny=fx?freightBrl/fx:freightAllCny;
+    const extraTotal=participantRow?Number(participantRow.extras||0):extras.reduce((sum,x)=>sum+Number(x.value||0),0);
     const base=productBrl+freightBrl+extraTotal;
     const importRate=Number(q.import_tax||0), icmsRate=Number(q.icms||0), serviceRate=Number(q.service||0), profitRate=Number(q.profit||0);
     const importValue=base*importRate/100, icmsValue=(base+importValue)*icmsRate/100, taxes=importValue+icmsValue;
     const subtotal=base+taxes, serviceValue=subtotal*serviceRate/100, afterService=subtotal+serviceValue, profitValue=afterService*profitRate/100;
-    const totalText=String(q.total_text||moneyBRL(afterService+profitValue));
+    const totalText=participantRow?moneyBRL(participantRow.total):String(q.total_text||moneyBRL(afterService+profitValue));
     const pageW=595,pageH=842,left=42,right=553,contentW=511;
     const pages=[]; let d=[]; let y=800;
     const navy='0.10 0.12 0.18'; const gray='0.93 0.94 0.96'; const mid='0.42 0.45 0.50';
@@ -518,7 +524,7 @@ d.push(pdfText(50, 798, 'F', 17, 'F2'));
 d.push(pdfText(
   86,
   802,
-  'FORWARDPRO',
+  String(brandSettings.brandName||'FORWARDPRO').toUpperCase(),
   20,
   'F2'
 ));
@@ -560,7 +566,7 @@ y = 748;
     header();
     // Client card
     section('Cliente');
-    const clientLines=[q.client_name||'Nao informado',q.phone?`WhatsApp: ${q.phone}`:'',q.email?`E-mail: ${q.email}`:'',q.address||'', [q.city,q.state,q.zip].filter(Boolean).join(' - ')].filter(Boolean);
+    const pc=participantClient||q; const clientLines=[pc.name||pc.client_name||q.client_name||'Nao informado',pc.phone?`WhatsApp: ${pc.phone}`:'',pc.email?`E-mail: ${pc.email}`:'',pc.address||'', [pc.city,pc.state,pc.zip].filter(Boolean).join(' - ')].filter(Boolean);
     for(const line of clientLines){ensure(40); d.push(pdfText(left,y,line,9)); y-=16;}
     y-=5;
     section('Produtos');
@@ -574,23 +580,23 @@ y = 748;
     y-=4;
     section('Frete e envio');
     row('Frete selecionado',String(freight.name||'Nao selecionado'),true);
-    row('Peso total',`${Number(q.weight_grams||0).toFixed(2)} g`);
+    row('Peso total',`${Number((participantRow?.weight ?? q.weight_grams) || 0).toFixed(2)} g`);
     if(freight.travel_time) row('Prazo estimado',String(freight.travel_time));
     row('Custo do frete',`${moneyCNY(freightCny)}  |  ${moneyBRL(freightBrl)}`);
     if(freight.insuranceRate!=null) row('Seguro',`${Number(freight.insuranceRate).toFixed(2)}%`);
     if(freight.description) for(const line of wrapPdf(freight.description,100)){ensure(35); d.push(pdfText(left,y,line,7.5)); y-=13;}
     if(extras.length){ y-=5; section('Adicionais'); for(const x of extras){ensure(35); row(String(x.description||'Adicional'),moneyBRL(x.value||0));}}
     y-=5; section('Resumo financeiro');
-    row('Produtos',moneyBRL(productBrl)); row('Frete',moneyBRL(freightBrl)); row('Adicionais',moneyBRL(extraTotal)); row('Base de custos',moneyBRL(base),true);
+    row('Produtos + frete interno China',moneyBRL(productBrl)); row('Frete internacional',moneyBRL(freightBrl)); row('Adicionais',moneyBRL(extraTotal)); row('Base de custos',moneyBRL(base),true);
     row(`Imposto de importacao (${importRate.toFixed(2)}%)`,moneyBRL(importValue)); row(`ICMS (${icmsRate.toFixed(2)}%)`,moneyBRL(icmsValue)); row('Subtotal com impostos',moneyBRL(subtotal),true);
     row(`Taxa operacional (${serviceRate.toFixed(2)}%)`,moneyBRL(serviceValue));
     ensure(100); y-=8; d.push('0.10 0.45 0.75 rg'); d.push(pdfFillRect(left,y-58,contentW,58)); d.push(pdfSetGray(1)); d.push(pdfText(left+14,y-20,'PRECO FINAL PARA O CLIENTE',9,'F2')); d.push(pdfText(left+14,y-45,totalText,20,'F2')); d.push(pdfSetGray(0)); y-=78;
     if(q.notes){ section('Observacoes'); for(const line of wrapPdf(q.notes,100)){ensure(35); d.push(pdfText(left,y,line,8)); y-=14;} }
-    ensure(50); d.push(pdfSetGray(0.45)); d.push(pdfLine(left,48,left+contentW,48)); d.push(pdfText(left,32,'ForwardPro - Documento gerado para fins de apresentação comercial.',7)); d.push(pdfText(445,32,`Pagina ${pages.length+1}`,7));
+    ensure(50); d.push(pdfSetGray(0.45)); d.push(pdfLine(left,48,left+contentW,48)); d.push(pdfText(left,32,String(brandSettings.pdfFooter||'Documento elaborado para fins de apresentação comercial.'),7)); d.push(pdfText(445,32,`Pagina ${pages.length+1}`,7));
     pages.push(d);
     // Add page footer numbers to every page where missing.
     for(let i=0;i<pages.length;i++){
-      const pg=pages[i]; pg.push(pdfSetGray(0.45)); pg.push(pdfLine(left,28,left+contentW,28)); pg.push(pdfText(left,14,'FORWARDPRO',7,'F2')); pg.push(pdfText(505,14,`Pagina ${i+1}/${pages.length}`,7));
+      const pg=pages[i]; pg.push(pdfSetGray(0.45)); pg.push(pdfLine(left,28,left+contentW,28)); pg.push(pdfText(left,14,String(brandSettings.brandName||'FORWARDPRO').toUpperCase(),7,'F2')); pg.push(pdfText(505,14,`Pagina ${i+1}/${pages.length}`,7));
     }
     const pdf=makeProfessionalPdf(pages);
     res.setHeader('Content-Type','application/pdf'); res.setHeader('Content-Length',String(pdf.length)); res.setHeader('Content-Disposition',`attachment; filename="${q.code||'cotacao'}.pdf"`); res.send(pdf);
@@ -665,6 +671,20 @@ app.put('/api/settings', auth, async (req,res)=>{
   const r=await pool.query(`INSERT INTO user_settings(user_id,default_profit,default_fx,default_service,default_import_tax,default_icms,pricing_mode,freight_mode,auto_insurance,round_mode,updated_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,NOW()) ON CONFLICT(user_id) DO UPDATE SET default_profit=EXCLUDED.default_profit,default_fx=EXCLUDED.default_fx,default_service=EXCLUDED.default_service,default_import_tax=EXCLUDED.default_import_tax,default_icms=EXCLUDED.default_icms,pricing_mode=EXCLUDED.pricing_mode,freight_mode=EXCLUDED.freight_mode,auto_insurance=EXCLUDED.auto_insurance,round_mode=EXCLUDED.round_mode,updated_at=NOW() RETURNING default_profit AS "defaultProfit",default_fx AS "defaultFx",default_service AS "defaultService",default_import_tax AS "defaultImportTax",default_icms AS "defaultIcms",pricing_mode AS "pricingMode",freight_mode AS "freightMode",auto_insurance AS "autoInsurance",round_mode AS "roundMode"`,[req.user.id,nums.profit,nums.fx,nums.service,nums.tax,nums.icms,pricing,freight,x.autoInsurance!==false,round]);
   res.json(r.rows[0]);
 });
+
+
+let fxCache={rate:0,updatedAt:0,source:''};
+app.get('/api/exchange/cny-brl', auth, async (_req,res)=>{
+  if(fxCache.rate && Date.now()-fxCache.updatedAt<10*60*1000)return res.json({...fxCache,cached:true});
+  let rate=0,source='';
+  try{const r=await fetch('https://api.frankfurter.app/latest?from=CNY&to=BRL');if(r.ok){const d=await r.json();rate=Number(d?.rates?.BRL||0);source='Frankfurter/ECB'}}catch{}
+  if(!rate){try{const r=await fetch('https://open.er-api.com/v6/latest/CNY');if(r.ok){const d=await r.json();rate=Number(d?.rates?.BRL||0);source='Open Exchange Rates mirror'}}catch{}}
+  if(!rate)return res.status(503).json({error:'Cotação CNY/BRL indisponível no momento.'});
+  fxCache={rate,updatedAt:Date.now(),updatedAtIso:new Date().toISOString(),source};res.json({rate,updatedAt:fxCache.updatedAtIso,source,cached:false});
+});
+app.get('/api/site-settings/public', async (_req,res)=>{const r=await pool.query('SELECT settings FROM site_settings WHERE id=1');res.json(r.rows[0]?.settings||{});});
+app.get('/api/admin/site-settings', auth, adminOnly, async (_req,res)=>{const r=await pool.query('SELECT settings FROM site_settings WHERE id=1');res.json(r.rows[0]?.settings||{});});
+app.put('/api/admin/site-settings', auth, adminOnly, async (req,res)=>{const x=req.body||{};const accent=/^#[0-9a-fA-F]{6}$/.test(String(x.accent||''))?x.accent:'#6474ff';const logo=String(x.logoDataUrl||'');if(logo.length>2200000)return res.status(400).json({error:'Logo muito grande. Use um arquivo menor.'});const settings={brandName:String(x.brandName||'ForwardPro').slice(0,80),tagline:String(x.tagline||'').slice(0,180),accent,pdfFooter:String(x.pdfFooter||'').slice(0,240),logoDataUrl:logo};const r=await pool.query(`INSERT INTO site_settings(id,settings,updated_at) VALUES(1,$1,NOW()) ON CONFLICT(id) DO UPDATE SET settings=EXCLUDED.settings,updated_at=NOW() RETURNING settings`,[JSON.stringify(settings)]);res.json(r.rows[0].settings);});
 
 app.post('/api/reset', auth, async (req,res)=>{
   await pool.query('DELETE FROM orders WHERE user_id=$1',[req.user.id]);
