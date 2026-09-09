@@ -680,16 +680,17 @@ let fxCache = {
   source: ''
 };
 
-app.get('/api/exchange/cny-brl', auth, async (_req, res) => {
+app.get('/api/exchange/cny-brl', auth, async (req, res) => {
   try {
-
-    // mantém cache por 30 minutos
+    // Cache de 30 minutos
     if (
       fxCache.rate &&
       Date.now() - fxCache.updatedAt < 30 * 60 * 1000
     ) {
       return res.json({
-        ...fxCache,
+        rate: fxCache.rate,
+        updatedAt: fxCache.updatedAtIso,
+        source: fxCache.source,
         cached: true
       });
     }
@@ -698,13 +699,15 @@ app.get('/api/exchange/cny-brl', auth, async (_req, res) => {
       'https://api.frankfurter.dev/v2/rate/CNY/BRL',
       {
         headers: {
-          'Accept': 'application/json'
+          Accept: 'application/json'
         }
       }
     );
 
     if (!response.ok) {
-      throw new Error(`Frankfurter HTTP ${response.status}`);
+      throw new Error(
+        `Frankfurter respondeu HTTP ${response.status}`
+      );
     }
 
     const data = await response.json();
@@ -723,18 +726,19 @@ app.get('/api/exchange/cny-brl', auth, async (_req, res) => {
     };
 
     return res.json({
-      rate,
+      rate: fxCache.rate,
       updatedAt: fxCache.updatedAtIso,
       source: fxCache.source,
       cached: false
     });
 
   } catch (error) {
+    console.error(
+      'ERRO AO ATUALIZAR CÂMBIO:',
+      error
+    );
 
-    console.error('ERRO AO ATUALIZAR CÂMBIO:', error);
-
-    // Se já conseguimos uma cotação antes,
-    // usa o último valor em vez de quebrar a tela.
+    // Usa o último valor caso já exista um cache
     if (fxCache.rate) {
       return res.json({
         rate: fxCache.rate,
@@ -749,7 +753,6 @@ app.get('/api/exchange/cny-brl', auth, async (_req, res) => {
       error: 'Não foi possível obter a cotação CNY/BRL.'
     });
   }
-});
 });
 app.get('/api/site-settings/public', async (_req,res)=>{const r=await pool.query('SELECT settings FROM site_settings WHERE id=1');res.json(r.rows[0]?.settings||{});});
 app.get('/api/admin/site-settings', auth, adminOnly, async (_req,res)=>{const r=await pool.query('SELECT settings FROM site_settings WHERE id=1');res.json(r.rows[0]?.settings||{});});
