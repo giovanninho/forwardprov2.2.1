@@ -79,7 +79,78 @@
 
   function renderParticipants(selected=[]){const mode=currentQuoteMode(),wrap=$id('participantsWrap'),split=$id('splitWrap');if(!wrap)return;wrap.classList.toggle('hide',mode!=='shared');split?.classList.toggle('hide',mode!=='shared');const grid=$id('participantsGrid');if(mode==='shared'){grid.innerHTML=(clientCache||[]).map(c=>`<label class="participant-chip"><input class="participant-check" type="checkbox" value="${c.id}" ${selected.includes(c.id)?'checked':''}> ${esc(c.name)}</label>`).join('');grid.querySelectorAll('input').forEach(x=>x.addEventListener('change',()=>{if(!$id('qClient').value&&x.checked)$id('qClient').value=x.value;renderProducts();calc()}))}renderParticipantBreakdown(calc?.().participantBreakdown||[])}
 
-  async function loadLiveFx(force=false){if($id('fxMode')?.value!=='auto'&&!force)return;try{$id('fxLiveStatus').textContent='Atualizando cotação...';const d=await api('/exchange/cny-brl');const rate=Number(d.rate);if(rate>0){$id('fx').value=rate.toFixed(6);calcPrefs.fx=rate;calc();$id('fxLiveStatus').textContent=`1 CNY = R$ ${rate.toFixed(4).replace('.',',')} · ${d.source||'mercado'} · ${new Date(d.updatedAt||Date.now()).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}`}}catch(e){$id('fxLiveStatus').textContent='Cotação ao vivo indisponível. Mantido o último câmbio.'}}
+  async function loadLiveFx(force = false) {
+
+  if (
+    $id('fxMode')?.value !== 'auto' &&
+    !force
+  ) return;
+
+  const status = $id('fxLiveStatus');
+
+  try {
+
+    status.textContent =
+      'Atualizando cotação CNY → BRL...';
+
+    const data =
+      await api('/exchange/cny-brl');
+
+    const rate =
+      Number(data.rate);
+
+    if (!Number.isFinite(rate) || rate <= 0) {
+      throw new Error('Cotação inválida');
+    }
+
+    $id('fx').value =
+      rate.toFixed(6);
+
+    calcPrefs.fx =
+      rate;
+
+    calc();
+
+    const updated =
+      data.updatedAt
+        ? new Date(data.updatedAt)
+        : new Date();
+
+    const time =
+      updated.toLocaleTimeString(
+        'pt-BR',
+        {
+          hour: '2-digit',
+          minute: '2-digit'
+        }
+      );
+
+    if (data.stale) {
+
+      status.textContent =
+        `1 CNY = R$ ${rate
+          .toFixed(4)
+          .replace('.', ',')} · último valor disponível`;
+
+    } else {
+
+      status.textContent =
+        `1 CNY = R$ ${rate
+          .toFixed(4)
+          .replace('.', ',')} · atualizado às ${time}`;
+    }
+
+  } catch (error) {
+
+    console.error(
+      'Erro ao atualizar câmbio:',
+      error
+    );
+
+    status.textContent =
+      'Não foi possível atualizar o câmbio. Usando o valor atual.';
+  }
+}
   function syncFxMode(){if(!$id('fxMode'))return;const auto=$id('fxMode').value==='auto';$id('fx').readOnly=auto;$id('fxRefreshBtn').classList.toggle('hide',!auto);$id('fxLiveTitle').textContent=auto?'Câmbio automático':'Câmbio manual travado';if(auto)loadLiveFx();else $id('fxLiveStatus').textContent='O valor desta cotação não será alterado automaticamente.';clearInterval(liveFxTimer);if(auto)liveFxTimer=setInterval(()=>loadLiveFx(),10*60*1000)}
 
   window.renderClients=async function(){const cs=await all('clients');clientCache=cs;let qs=[],os=[];try{[qs,os]=await Promise.all([all('quotes'),all('orders')])}catch{}const qCount={},oCount={},spent={};qs.forEach(q=>{const id=q.clientId||q.client_id;if(id)qCount[id]=(qCount[id]||0)+1});os.forEach(o=>{const id=o.clientId||o.client_id;if(id){oCount[id]=(oCount[id]||0)+1;spent[id]=(spent[id]||0)+Number(o.totalNumeric||o.total_numeric||0)}});const host=$id('clientsTable');const panel=host.closest('.panel');if(panel&&!panel.previousElementSibling?.classList?.contains('client-kpis'))panel.insertAdjacentHTML('beforebegin','<div class="client-kpis" id="clientKpis"></div>');const totalSpent=Object.values(spent).reduce((a,b)=>a+b,0);$id('clientKpis').innerHTML=`<div class="client-kpi"><small>Clientes</small><b>${cs.length}</b></div><div class="client-kpi"><small>Com pedidos</small><b>${Object.keys(oCount).length}</b></div><div class="client-kpi"><small>Orçamentos</small><b>${qs.length}</b></div><div class="client-kpi"><small>Volume em pedidos</small><b>${money(totalSpent)}</b></div>`;host.innerHTML=cs.length?`<div class="client-grid">${cs.map(c=>`<div class="client-card"><div class="client-card-top"><div class="client-card-name"><span class="client-avatar">${esc(c.name.slice(0,2).toUpperCase())}</span><div><b>${esc(c.name)}</b><div class="muted">${esc(c.phone||c.email||'Sem contato')}</div></div></div><button class="btn" onclick='openClient(${JSON.stringify(c).replace(/'/g,"&#39;")})'>Editar</button></div><div class="mini-stats"><div><small>Orçamentos</small><b>${qCount[c.id]||0}</b></div><div><small>Pedidos</small><b>${oCount[c.id]||0}</b></div><div><small>Total</small><b>${money(spent[c.id]||0)}</b></div></div><div class="muted">${esc([c.city,c.state].filter(Boolean).join(' / ')||c.note||'Cliente cadastrado')}</div></div>`).join('')}</div>`:'<div class="empty">Nenhum cliente cadastrado.</div>';renderParticipants()};
