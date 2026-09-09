@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <link rel="icon" type="image/png" href="/favicon.png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/png" href="/favicon.png">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>ForwardPro — Gestão de Redirecionamentos</title>
     <style>
@@ -77,6 +77,7 @@ body.light .side{background:#ffffffdd;border-right-color:#dfe5ef}body.light .top
 /* ===== ForwardPro v3 — Motor automático ===== */
 .auto-pill,.live-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:#35d49a12;color:#62e2b0;border:1px solid #35d49a25;font-size:9px;font-weight:850;letter-spacing:.7px}.auto-pill i,.live-badge i{width:6px;height:6px;border-radius:50%;background:#35d49a;box-shadow:0 0 12px #35d49aaa}.auto-banner{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:16px 18px;margin-bottom:14px;border:1px solid #6c7cff25;border-radius:16px;background:linear-gradient(110deg,#6c7cff12,#101829cc 55%,#35d49a08)}.auto-banner-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--p),var(--p2));font-size:18px}.auto-banner b{display:block;font-size:13px}.auto-banner span{display:block;color:var(--muted);font-size:10px;margin-top:4px;line-height:1.45}.card-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.card-title-row>div{display:flex;align-items:center;gap:9px}.card-title-row h2{margin:0!important}.step-number{width:26px;height:26px;border-radius:8px;background:#6c7cff14;color:#aeb6ff;display:grid;place-items:center;font-size:9px;font-weight:900}.auto-freight-empty,.auto-freight-selected{padding:18px;border-radius:14px;border:1px solid #ffffff0e;background:#ffffff03}.auto-freight-empty b,.auto-freight-selected b{display:block}.auto-freight-empty span{display:block;margin-top:5px;color:var(--muted);font-size:10px}.auto-freight-selected{display:grid;grid-template-columns:1fr auto;gap:10px;border-color:#35d49a24;background:linear-gradient(120deg,#35d49a09,#ffffff02)}.auto-freight-selected .price{text-align:right;font-size:22px;font-weight:900}.auto-freight-selected .meta{color:var(--muted);font-size:10px;margin-top:6px}.auto-details{margin-top:10px}.auto-details summary,.quote-overrides summary{cursor:pointer;color:#9ca9ff;font-size:10px;font-weight:800}.auto-result-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:13px;margin-top:13px}.calc-breakdown{margin:0}.break-row{display:flex;justify-content:space-between;gap:18px;padding:9px 0;border-bottom:1px solid #ffffff08;color:#8e9bb8;font-size:11px}.break-row b{color:#f5f7ff}.break-row small{color:#65728b}.break-row.subtotal{margin-top:4px;padding-top:13px;color:#b7c1d6;font-weight:700}.break-row.profit{border:0;color:#62e2b0}.break-row.profit b{color:#62e2b0}.final-card{border:1px solid #6c7cff30;border-radius:18px;padding:23px;background:linear-gradient(145deg,#6c7cff18,#101829 54%,#8b5cf613);box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center}.final-kicker{font-size:9px;letter-spacing:1.7px;color:#9ca9ff;font-weight:900}.final-value{font-size:42px;font-weight:950;letter-spacing:-2px;margin:8px 0}.final-meta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:10px}.rule-summary{margin-top:16px;padding:10px;border:1px solid #ffffff0b;border-radius:10px;background:#ffffff03;color:#7f8da8;font-size:9px;line-height:1.55}.final-actions{margin-top:15px}.quote-overrides{margin-top:13px}.quote-overrides[open] summary{margin-bottom:12px}.calc-flash{animation:calcFlash .32s ease}@keyframes calcFlash{0%{opacity:.45}100%{opacity:1}}@media(max-width:800px){.auto-result-grid{grid-template-columns:1fr}.auto-banner{grid-template-columns:auto 1fr}.auto-banner .btn{grid-column:1/-1}.final-value{font-size:36px}}@media(max-width:600px){.auto-pill{display:none}.auto-freight-selected{grid-template-columns:1fr}.auto-freight-selected .price{text-align:left}.final-meta{flex-direction:column}.auto-banner{padding:13px}.final-card{padding:18px}}
 </style>
+  <link rel="stylesheet" href="/v4.css">
 </head>
 
 <body class="auth-locked">
@@ -559,7 +560,7 @@ async function viewQuote(id){
     }).join('');
     const extraHtml=extrasQ.length?'<h3>Adicionais</h3>'+extrasQ.map(x=>`<div class="note" style="margin-bottom:6px">${esc(x.description)} — ${money(x.value)}</div>`).join(''):'';
     const notesHtml=q.notes?`<h3>Observações</h3><div class="note">${esc(q.notes)}</div>`:'';
-    const convertBtn=q.status==='Orçamento'?`<button class="btn primary" onclick="closeModal('detailModal');convertToOrder('${q.id}')">Transformar em pedido</button>`:'';
+    const convertBtn=['Orçamento','Cotação'].includes(q.status)?`<button class="btn primary" onclick="closeModal('detailModal');convertToOrder('${q.id}')">Transformar em pedido</button>`:'';
     $('detailTitle').textContent=q.code||q.id;
     $('detailBody').innerHTML=`
       <div class="note"><b>Cliente:</b> ${esc(q.client_name||'Não informado')}<br>
@@ -623,6 +624,7 @@ function renderActivity(){const items=[...quoteCache.map(q=>({date:q.created,tex
 setTheme(getTheme());setMotion(localStorage.getItem('fp_motion')!=='0');setAuthMode('login',false);document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='j'){e.preventDefault();toggleTheme()}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();go('calculator')}});(async()=>{renderProducts();renderExtras();calc();await bootAuth()})().catch(e=>console.error(e));
 
     </script>
+  <script src="/v4.js"></script>
 </body>
 
 </html>
